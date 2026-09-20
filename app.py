@@ -272,13 +272,6 @@ _FLUID_BG = """
                 'position:fixed!important;top:0!important;left:0!important;' +
                 'width:100vw!important;height:100vh!important;z-index:0!important;' +
                 'pointer-events:none!important;border:none!important;background:transparent!important;';
-            /* Clear height constraints Streamlit puts on wrapper divs */
-            var p = f.parentElement;
-            for (var i = 0; i < 5 && p; i++) {
-                p.style.height = 'auto';
-                p.style.overflow = 'visible';
-                p = p.parentElement;
-            }
         }
     } catch(e){}
 
