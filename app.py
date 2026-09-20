@@ -6,6 +6,7 @@ Decision-support machine learning interface for clinicians and college project p
 from pathlib import Path
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 # ── Page Configuration ──────────────────────────────────────────────────────────
 st.set_page_config(
@@ -253,116 +254,99 @@ st.markdown(
 )
 
 # ── Interactive Fluid Background ────────────────────────────────────────────────
-st.markdown(
-    """
-    <canvas id="fluid-bg"></canvas>
-    <style>
-    #fluid-bg {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-        z-index: -1;
-        pointer-events: none;
+# Uses components.html() because st.markdown strips <script> tags.
+# The JS repositions its own iframe to sit fixed behind all Streamlit content.
+_FLUID_BG = """
+<style>
+    html, body { margin:0; padding:0; overflow:hidden; background:transparent; }
+    canvas { display:block; }
+</style>
+<canvas id="c"></canvas>
+<script>
+(function(){
+    /* ── Reposition this iframe as a fixed fullscreen backdrop ── */
+    try {
+        var f = window.frameElement;
+        if (f) {
+            f.style.cssText =
+                'position:fixed!important;top:0!important;left:0!important;' +
+                'width:100vw!important;height:100vh!important;z-index:0!important;' +
+                'pointer-events:none!important;border:none!important;background:transparent!important;';
+            /* Clear height constraints Streamlit puts on wrapper divs */
+            var p = f.parentElement;
+            for (var i = 0; i < 5 && p; i++) {
+                p.style.height = 'auto';
+                p.style.overflow = 'visible';
+                p = p.parentElement;
+            }
+        }
+    } catch(e){}
+
+    var cv = document.getElementById('c');
+    var ctx = cv.getContext('2d');
+    var W, H, mx = -9999, my = -9999, pts = [];
+
+    function resize(){ W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+
+    /* Listen on PARENT document so mouse works even though iframe has pointer-events:none */
+    try {
+        window.parent.document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
+        window.parent.document.addEventListener('mouseleave', function(){ mx=-9999; my=-9999; });
+    } catch(e){
+        document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
     }
-    </style>
-    <script>
-    (function() {
-        const canvas = document.getElementById('fluid-bg');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        let W, H, mouse = {x: -9999, y: -9999}, particles = [];
 
-        function resize() {
-            W = canvas.width  = window.innerWidth;
-            H = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+    /* Particle pool */
+    for(var i=0;i<90;i++){
+        pts.push({
+            x: Math.random()*2000, y: Math.random()*2000,
+            r: Math.random()*2.2+0.8,
+            vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35,
+            hue: Math.random()<0.5 ? 0 : 220,
+            sat: 60+Math.random()*30,
+            lit: 45+Math.random()*15,
+            a:   0.25+Math.random()*0.25
+        });
+    }
 
-        /* Track mouse across the whole page (canvas has pointer-events:none) */
-        document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+    function loop(){
+        ctx.clearRect(0,0,W,H);
 
-        /* Particle pool */
-        const COUNT = 90;
-        for (let i = 0; i < COUNT; i++) {
-            particles.push({
-                x: Math.random() * 2000,
-                y: Math.random() * 2000,
-                r: Math.random() * 2.2 + 0.8,
-                vx: (Math.random() - 0.5) * 0.35,
-                vy: (Math.random() - 0.5) * 0.35,
-                hue: Math.random() < 0.5 ? 0 : 220,           /* red or blue family */
-                sat: 60 + Math.random() * 30,
-                light: 45 + Math.random() * 15,
-                alpha: 0.25 + Math.random() * 0.25,
-            });
+        for(var i=0;i<pts.length;i++){
+            var p=pts[i];
+            var dx=mx-p.x, dy=my-p.y, d=Math.sqrt(dx*dx+dy*dy)||1;
+            if(d<260){ var f=(260-d)/260*0.015; p.vx+=dx/d*f; p.vy+=dy/d*f; }
+            p.vx*=0.993; p.vy*=0.993;
+            p.x+=p.vx; p.y+=p.vy;
+            if(p.x<-10) p.x=W+10; if(p.x>W+10) p.x=-10;
+            if(p.y<-10) p.y=H+10; if(p.y>H+10) p.y=-10;
+
+            ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283);
+            ctx.fillStyle='hsla('+p.hue+','+p.sat+'%,'+p.lit+'%,'+p.a+')';
+            ctx.fill();
         }
 
-        function draw() {
-            ctx.clearRect(0, 0, W, H);
-
-            for (let p of particles) {
-                /* Mouse interaction — gentle gravitational pull */
-                const dx = mouse.x - p.x;
-                const dy = mouse.y - p.y;
-                const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-                if (dist < 260) {
-                    const force = (260 - dist) / 260 * 0.012;
-                    p.vx += dx / dist * force;
-                    p.vy += dy / dist * force;
-                }
-
-                /* Damping */
-                p.vx *= 0.993;
-                p.vy *= 0.993;
-
-                p.x += p.vx;
-                p.y += p.vy;
-
-                /* Wrap edges */
-                if (p.x < -10) p.x = W + 10;
-                if (p.x > W + 10) p.x = -10;
-                if (p.y < -10) p.y = H + 10;
-                if (p.y > H + 10) p.y = -10;
-
-                /* Draw dot with soft glow */
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha})`;
-                ctx.fill();
-            }
-
-            /* Draw connections near mouse */
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const a = particles[i], b = particles[j];
-                    const d = Math.hypot(a.x - b.x, a.y - b.y);
-                    if (d < 120) {
-                        /* Brighten lines near mouse */
-                        const mDist = Math.min(
-                            Math.hypot(a.x - mouse.x, a.y - mouse.y),
-                            Math.hypot(b.x - mouse.x, b.y - mouse.y)
-                        );
-                        const lineAlpha = (1 - d / 120) * (mDist < 220 ? 0.18 : 0.04);
-                        ctx.beginPath();
-                        ctx.moveTo(a.x, a.y);
-                        ctx.lineTo(b.x, b.y);
-                        ctx.strokeStyle = `rgba(231, 76, 60, ${lineAlpha})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.stroke();
-                    }
+        /* Connection lines — brighter near mouse */
+        for(var i=0;i<pts.length;i++){
+            for(var j=i+1;j<pts.length;j++){
+                var a=pts[i],b=pts[j],dd=Math.hypot(a.x-b.x,a.y-b.y);
+                if(dd<120){
+                    var md=Math.min(Math.hypot(a.x-mx,a.y-my),Math.hypot(b.x-mx,b.y-my));
+                    var la=(1-dd/120)*(md<220?0.18:0.04);
+                    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+                    ctx.strokeStyle='rgba(231,76,60,'+la+')';
+                    ctx.lineWidth=0.6; ctx.stroke();
                 }
             }
-
-            requestAnimationFrame(draw);
         }
-        draw();
-    })();
-    </script>
-    """,
-    unsafe_allow_html=True,
-)
+        requestAnimationFrame(loop);
+    }
+    loop();
+})();
+</script>
+"""
+components.html(_FLUID_BG, height=0)
 
 # ── Predictor cache ─────────────────────────────────────────────────────────────
 @st.cache_resource
