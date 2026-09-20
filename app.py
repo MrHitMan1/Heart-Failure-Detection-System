@@ -38,12 +38,19 @@ st.markdown(
     .hero-title {
         font-size: 2.6rem;
         font-weight: 900;
+        margin: 0 0 0.3rem 0;
+        letter-spacing: -0.5px;
+    }
+    .hero-title .emoji {
+        -webkit-text-fill-color: initial;
+        background: none;
+        font-size: 2.6rem;
+    }
+    .hero-title .gradient-text {
         background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin: 0 0 0.3rem 0;
-        letter-spacing: -0.5px;
     }
     .hero-subtitle {
         font-size: 1rem;
@@ -245,6 +252,118 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# ── Interactive Fluid Background ────────────────────────────────────────────────
+st.markdown(
+    """
+    <canvas id="fluid-bg"></canvas>
+    <style>
+    #fluid-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: -1;
+        pointer-events: none;
+    }
+    </style>
+    <script>
+    (function() {
+        const canvas = document.getElementById('fluid-bg');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H, mouse = {x: -9999, y: -9999}, particles = [];
+
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        /* Track mouse across the whole page (canvas has pointer-events:none) */
+        document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+        /* Particle pool */
+        const COUNT = 90;
+        for (let i = 0; i < COUNT; i++) {
+            particles.push({
+                x: Math.random() * 2000,
+                y: Math.random() * 2000,
+                r: Math.random() * 2.2 + 0.8,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35,
+                hue: Math.random() < 0.5 ? 0 : 220,           /* red or blue family */
+                sat: 60 + Math.random() * 30,
+                light: 45 + Math.random() * 15,
+                alpha: 0.25 + Math.random() * 0.25,
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            for (let p of particles) {
+                /* Mouse interaction — gentle gravitational pull */
+                const dx = mouse.x - p.x;
+                const dy = mouse.y - p.y;
+                const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+                if (dist < 260) {
+                    const force = (260 - dist) / 260 * 0.012;
+                    p.vx += dx / dist * force;
+                    p.vy += dy / dist * force;
+                }
+
+                /* Damping */
+                p.vx *= 0.993;
+                p.vy *= 0.993;
+
+                p.x += p.vx;
+                p.y += p.vy;
+
+                /* Wrap edges */
+                if (p.x < -10) p.x = W + 10;
+                if (p.x > W + 10) p.x = -10;
+                if (p.y < -10) p.y = H + 10;
+                if (p.y > H + 10) p.y = -10;
+
+                /* Draw dot with soft glow */
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha})`;
+                ctx.fill();
+            }
+
+            /* Draw connections near mouse */
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i], b = particles[j];
+                    const d = Math.hypot(a.x - b.x, a.y - b.y);
+                    if (d < 120) {
+                        /* Brighten lines near mouse */
+                        const mDist = Math.min(
+                            Math.hypot(a.x - mouse.x, a.y - mouse.y),
+                            Math.hypot(b.x - mouse.x, b.y - mouse.y)
+                        );
+                        const lineAlpha = (1 - d / 120) * (mDist < 220 ? 0.18 : 0.04);
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.strokeStyle = `rgba(231, 76, 60, ${lineAlpha})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+    </script>
+    """,
+    unsafe_allow_html=True,
+)
+
 # ── Predictor cache ─────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_predictor():
@@ -273,7 +392,7 @@ PRESETS = {
 st.markdown(
     """
     <div class="hero-banner">
-        <div class="hero-title">🫀 CardioSense AI</div>
+        <div class="hero-title"><span class="emoji">🫀</span> <span class="gradient-text">CardioSense AI</span></div>
         <div class="hero-subtitle">HEART FAILURE DETECTION SYSTEM &nbsp;·&nbsp; ML-POWERED CLINICAL DECISION SUPPORT</div>
     </div>
     """,
