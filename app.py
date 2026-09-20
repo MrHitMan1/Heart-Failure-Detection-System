@@ -1065,7 +1065,7 @@ with tab1:
             )
             st_slope = slope_mapping[slope_choice]
 
-        submit_assessment = st.form_submit_button("🫀  Analyze Cardiac Risk", use_container_width=True)
+        submit_assessment = st.form_submit_button("🫀  Analyze Cardiac Risk", width="stretch")
 
     # ── Assessment Results (Apple Health Dashboard) ──
     if submit_assessment:
@@ -1281,7 +1281,7 @@ with tab2:
                 subset=["False Negatives"],
                 color="rgba(48, 209, 88, 0.25)",
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -1305,7 +1305,7 @@ with tab2:
     with c1:
         st.markdown('<div class="apple-card" style="padding: 1.2rem; margin-bottom: 0;">', unsafe_allow_html=True)
         if roc_img.exists():
-            st.image(str(roc_img), caption="Multi-Model ROC Curves Overlay (Test Set)", use_container_width=True)
+            st.image(str(roc_img), caption="Multi-Model ROC Curves Overlay (Test Set)", width="stretch")
         else:
             st.warning("ROC curves plot not found.")
         st.markdown('</div>', unsafe_allow_html=True)
@@ -1313,7 +1313,7 @@ with tab2:
     with c2:
         st.markdown('<div class="apple-card" style="padding: 1.2rem; margin-bottom: 0;">', unsafe_allow_html=True)
         if cm_img.exists():
-            st.image(str(cm_img), caption="Normalized Confusion Matrix (Winning Pipeline)", use_container_width=True)
+            st.image(str(cm_img), caption="Normalized Confusion Matrix (Winning Pipeline)", width="stretch")
         else:
             st.warning("Confusion matrix plot not found.")
         st.markdown('</div>', unsafe_allow_html=True)
@@ -1322,7 +1322,7 @@ with tab2:
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown('<div class="apple-card" style="padding: 1.4rem;">', unsafe_allow_html=True)
         st.markdown("##### 🌲 Feature Importance & Predictive Markers")
-        st.image(str(fi_img), caption="Top Clinical Predictive Markers in the Pipeline", use_container_width=True)
+        st.image(str(fi_img), caption="Top Clinical Predictive Markers in the Pipeline", width="stretch")
         st.markdown('</div>', unsafe_allow_html=True)
 
 
