@@ -294,10 +294,8 @@ st.markdown(
         letter-spacing: -0.01em !important;
     }
 
-    /* Distinct Input Boxes (Number Input Container & Selectbox) */
+    /* ── Number Input & Text Input Boxes ── */
     div[data-testid="stNumberInputContainer"],
-    div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
-    div[data-baseweb="select"] > div,
     div[data-testid="stTextInput"] [data-baseweb="input"] > div {
         background-color: #22222a !important;
         background: #22222a !important;
@@ -308,9 +306,37 @@ st.markdown(
         transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
     }
 
-    /* Hover State */
+    /* ── Dropdown Selectboxes (Sex, Pain Type, ECG, Slope, Presets) ── */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"],
+    div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+    div[data-testid="stSelectbox"] div[role="combobox"],
+    div[data-baseweb="select"],
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="select"] div[role="combobox"] {
+        background-color: #22222a !important;
+        background: #22222a !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
+        border-radius: 12px !important;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        min-height: 44px !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+    }
+
+    /* Selectbox Inner Child Elements Transparency (prevent double borders or dark overrides) */
+    div[data-testid="stSelectbox"] [data-baseweb="select"] > div > div,
+    div[data-testid="stSelectbox"] [data-baseweb="select"] [class*="ValueContainer"],
+    div[data-testid="stSelectbox"] [data-baseweb="select"] [class*="SingleValue"],
+    div[data-baseweb="select"] > div > div {
+        background-color: transparent !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    /* Hover State for Inputs & Selectboxes */
     div[data-testid="stNumberInputContainer"]:hover,
+    div[data-testid="stSelectbox"] div[data-baseweb="select"]:hover,
     div[data-testid="stSelectbox"] [data-baseweb="select"] > div:hover,
+    div[data-baseweb="select"]:hover,
     div[data-baseweb="select"] > div:hover,
     div[data-testid="stTextInput"] [data-baseweb="input"] > div:hover {
         background-color: #282832 !important;
@@ -320,12 +346,15 @@ st.markdown(
 
     /* Focus State: Apple Halo Glow */
     div[data-testid="stNumberInputContainer"]:focus-within,
+    div[data-testid="stSelectbox"] div[data-baseweb="select"]:focus-within,
     div[data-testid="stSelectbox"] [data-baseweb="select"]:focus-within > div,
+    div[data-baseweb="select"]:focus-within,
     div[data-baseweb="select"]:focus-within > div,
+    div[data-baseweb="select"][aria-expanded="true"] > div,
     div[data-testid="stTextInput"] [data-baseweb="input"]:focus-within > div {
         background-color: #262630 !important;
         background: #262630 !important;
-        border: 1.5px solid #FF2D55 !important;
+        border-color: #FF2D55 !important;
         box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.28), inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     }
 
@@ -366,14 +395,49 @@ st.markdown(
     }
 
     /* Selectbox text and dropdown icon */
+    div[data-testid="stSelectbox"] span,
+    div[data-testid="stSelectbox"] div,
     div[data-baseweb="select"] span,
     div[data-baseweb="select"] div {
         color: #FFFFFF !important;
         font-weight: 500 !important;
+        font-size: 0.96rem !important;
     }
+    div[data-testid="stSelectbox"] svg,
     div[data-baseweb="select"] svg {
-        fill: #AEAEB2 !important;
-        color: #AEAEB2 !important;
+        fill: #D1D1D6 !important;
+        color: #D1D1D6 !important;
+    }
+
+    /* Dropdown Popover Menu (when expanded) */
+    div[data-baseweb="popover"],
+    div[data-baseweb="popover"] > div,
+    div[data-baseweb="menu"],
+    ul[data-baseweb="menu"] {
+        background-color: #22222a !important;
+        background: #22222a !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+        border-radius: 14px !important;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65) !important;
+    }
+    li[data-baseweb="menu-item"],
+    div[data-baseweb="menu"] li,
+    ul[data-baseweb="menu"] li {
+        background-color: transparent !important;
+        color: #FFFFFF !important;
+        font-size: 0.94rem !important;
+        border-radius: 8px !important;
+        margin: 2px 4px !important;
+        padding: 8px 12px !important;
+        transition: background-color 0.15s ease !important;
+    }
+    li[data-baseweb="menu-item"]:hover,
+    li[data-baseweb="menu-item"][aria-selected="true"],
+    div[data-baseweb="menu"] li:hover,
+    ul[data-baseweb="menu"] li:hover {
+        background-color: rgba(255, 45, 85, 0.3) !important;
+        background: rgba(255, 45, 85, 0.3) !important;
+        color: #FFFFFF !important;
     }
 
     /* Completely hide 'Press Enter to submit form' helper prompt */
