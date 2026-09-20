@@ -102,12 +102,12 @@ Evaluated on the held-out stratified test set (20% partition, $N = 184$ patients
 
 | Model | Accuracy | Precision | Recall (Sensitivity) | F1-Score | ROC-AUC | CV F1 (Mean ± Std) | False Negatives |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Random Forest** | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* |
-| **Support Vector Machine** | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* |
-| **Logistic Regression** | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* |
-| **Decision Tree** | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* | *To be populated* |
+| **Logistic Regression (Winner)** | **90.22%** | **89.62%** | **93.14%** | **0.9135** | **0.9366** | **0.8751 ± 0.0295** | **7** |
+| **Random Forest** | 89.67% | 88.79% | 93.14% | 0.9091 | 0.9330 | 0.8885 ± 0.0358 | 7 |
+| **Support Vector Machine** | 88.04% | 87.74% | 91.18% | 0.8942 | 0.9439 | 0.8783 ± 0.0312 | 9 |
+| **Decision Tree** | 81.52% | 84.00% | 82.35% | 0.8317 | 0.8453 | 0.8468 ± 0.0207 | 18 |
 
-*(The complete benchmark metrics table is generated automatically in `reports/model_comparison_metrics.md` upon executing the training pipeline).*
+> **Selection Summary:** **Logistic Regression** was selected as the primary production pipeline. It achieved the highest overall F1-score (**0.9135**), tied for the highest Recall (**93.14%** / only 7 False Negatives out of 102 positive cases), and provides transparent linear odds ratios and coefficients for clinical interpretability. Random Forest followed closely as a powerful ensemble alternative.
 
 ---
 
