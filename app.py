@@ -37,39 +37,41 @@ st.markdown(
         padding-top: 1.8rem !important;
         padding-bottom: 3.5rem !important;
         max-width: 1200px !important;
+        position: relative !important;
+        z-index: 1 !important;
     }
 
     /* ── Apple Glassmorphic Card (Translucent Acrylic / Vibrancy) ── */
     .apple-card {
-        background: rgba(28, 28, 30, 0.65);
-        backdrop-filter: blur(30px) saturate(190%);
-        -webkit-backdrop-filter: blur(30px) saturate(190%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
-                    0 16px 36px rgba(0, 0, 0, 0.45);
-        border-radius: 20px;
-        padding: 1.6rem 1.8rem;
-        margin-bottom: 1.3rem;
+        background: rgba(22, 22, 28, 0.82) !important;
+        backdrop-filter: blur(45px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(45px) saturate(200%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.11) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
+                    0 20px 48px rgba(0, 0, 0, 0.55) !important;
+        border-radius: 22px !important;
+        padding: 1.8rem 2rem;
+        margin-bottom: 1.4rem;
         transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
                     border-color 0.25s ease,
                     box-shadow 0.25s ease;
     }
     .apple-card:hover {
-        border-color: rgba(255, 255, 255, 0.15);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
-                    0 20px 42px rgba(0, 0, 0, 0.55);
+        border-color: rgba(255, 255, 255, 0.18) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                    0 24px 54px rgba(0, 0, 0, 0.65) !important;
     }
 
     /* ── Apple Health Hero Header ── */
     .apple-hero {
-        background: linear-gradient(180deg, rgba(38, 38, 42, 0.7) 0%, rgba(20, 20, 22, 0.85) 100%);
-        backdrop-filter: blur(40px) saturate(190%);
-        -webkit-backdrop-filter: blur(40px) saturate(190%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                    0 24px 48px rgba(0, 0, 0, 0.6);
-        border-radius: 24px;
-        padding: 2.2rem 2.5rem;
+        background: linear-gradient(180deg, rgba(32, 32, 38, 0.85) 0%, rgba(18, 18, 22, 0.9) 100%) !important;
+        backdrop-filter: blur(50px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(50px) saturate(200%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.13) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                    0 28px 56px rgba(0, 0, 0, 0.65) !important;
+        border-radius: 26px !important;
+        padding: 2.2rem 2.6rem;
         margin-bottom: 1.5rem;
         position: relative;
         overflow: hidden;
@@ -81,17 +83,17 @@ st.markdown(
         left: -20%;
         width: 140%;
         height: 200%;
-        background: radial-gradient(circle at 30% 20%, rgba(255, 45, 85, 0.12) 0%, transparent 60%);
+        background: radial-gradient(circle at 30% 20%, rgba(255, 45, 85, 0.14) 0%, transparent 60%);
         pointer-events: none;
     }
     .apple-pill-badge {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(255, 45, 85, 0.15);
-        border: 1px solid rgba(255, 45, 85, 0.35);
+        background: rgba(255, 45, 85, 0.16);
+        border: 1px solid rgba(255, 45, 85, 0.4);
         border-radius: 999px;
-        padding: 4px 12px;
+        padding: 4px 13px;
         font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.08em;
@@ -123,7 +125,7 @@ st.markdown(
     }
     .apple-subtitle {
         font-size: 1rem;
-        color: #8E8E93;
+        color: #98989D;
         font-weight: 400;
         margin: 0;
         letter-spacing: -0.01em;
@@ -132,17 +134,19 @@ st.markdown(
 
     /* ── Apple Medical Notice ── */
     .apple-notice {
-        background: rgba(255, 69, 58, 0.08);
-        border: 1px solid rgba(255, 69, 58, 0.22);
-        border-radius: 14px;
-        padding: 0.9rem 1.3rem;
+        background: rgba(255, 69, 58, 0.1) !important;
+        backdrop-filter: blur(35px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
+        border: 1px solid rgba(255, 69, 58, 0.28) !important;
+        border-radius: 16px !important;
+        padding: 0.95rem 1.4rem;
         margin-bottom: 1.6rem;
         display: flex;
         align-items: center;
         gap: 12px;
         font-size: 0.88rem;
-        color: #FF8080;
-        backdrop-filter: blur(12px);
+        color: #FF8A8A;
+        box-shadow: 0 8px 24px rgba(255, 69, 58, 0.1);
     }
     .apple-notice strong {
         color: #FF453A;
@@ -150,37 +154,149 @@ st.markdown(
     }
 
     /* ── Apple Segmented Control (Tabs) ── */
-    .stTabs [data-baseweb="tab-list"] {
-        background: rgba(118, 118, 128, 0.18) !important;
-        backdrop-filter: blur(25px) !important;
-        -webkit-backdrop-filter: blur(25px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.06) !important;
-        border-radius: 14px !important;
-        padding: 4px !important;
-        gap: 4px !important;
+    div[data-testid="stTabs"] {
+        background: transparent !important;
         margin-bottom: 1.8rem !important;
     }
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 10px !important;
-        padding: 0.6rem 1.3rem !important;
-        font-size: 0.9rem !important;
-        font-weight: 600 !important;
-        color: #8E8E93 !important;
+
+    div[data-testid="stTabs"] [data-baseweb="tab-list"],
+    .stTabs [data-baseweb="tab-list"],
+    [data-baseweb="tab-list"] {
+        background: rgba(118, 118, 128, 0.24) !important;
+        backdrop-filter: blur(45px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(45px) saturate(200%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 16px !important;
+        padding: 5px !important;
+        gap: 6px !important;
+        border-bottom: none !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                    0 10px 28px rgba(0, 0, 0, 0.4) !important;
+        width: fit-content !important;
+        max-width: 100% !important;
+    }
+
+    /* Remove ALL default underlines, borders, and red highlight lines from Streamlit */
+    div[data-testid="stTabs"] [data-baseweb="tab-highlight"],
+    div[data-testid="stTabs"] [data-baseweb="tab-border"],
+    div[data-baseweb="tab-highlight"],
+    div[data-baseweb="tab-border"],
+    [data-baseweb="tab-highlight"],
+    [data-baseweb="tab-border"] {
+        display: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        width: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
         border: none !important;
         background: transparent !important;
-        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+        position: absolute !important;
+        pointer-events: none !important;
     }
-    .stTabs [data-baseweb="tab"]:hover {
+
+    /* Base Tab Buttons */
+    div[data-testid="stTabs"] button[data-baseweb="tab"],
+    .stTabs button[data-baseweb="tab"],
+    button[data-baseweb="tab"] {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: 1px solid transparent !important;
+        border-bottom: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-radius: 11px !important;
+        padding: 0.55rem 1.4rem !important;
+        font-size: 0.92rem !important;
+        font-weight: 500 !important;
+        color: #8E8E93 !important;
+        outline: none !important;
+        box-shadow: none !important;
+        transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    }
+
+    div[data-testid="stTabs"] button[data-baseweb="tab"]:hover,
+    .stTabs button[data-baseweb="tab"]:hover,
+    button[data-baseweb="tab"]:hover {
         color: #FFFFFF !important;
-        background: rgba(255, 255, 255, 0.06) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        background-color: rgba(255, 255, 255, 0.08) !important;
+        border-bottom: none !important;
     }
-    .stTabs [aria-selected="true"] {
-        background: rgba(255, 255, 255, 0.14) !important;
+
+    /* Selected Tab: Apple Floating Frosted Capsule (No Red Underline!) */
+    div[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"],
+    .stTabs button[data-baseweb="tab"][aria-selected="true"],
+    button[data-baseweb="tab"][aria-selected="true"] {
+        background: rgba(255, 255, 255, 0.18) !important;
+        background-color: rgba(255, 255, 255, 0.18) !important;
+        backdrop-filter: blur(25px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
         color: #FFFFFF !important;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35) !important;
+        font-weight: 600 !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
+        border-radius: 11px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
     }
-    .stTabs [data-baseweb="tab-highlight"] {
+
+    /* Strip any child border elements */
+    div[data-testid="stTabs"] button[data-baseweb="tab"] *,
+    button[data-baseweb="tab"] * {
+        border-bottom: none !important;
+        border-bottom-color: transparent !important;
+        border-bottom-width: 0 !important;
+        text-decoration: none !important;
+    }
+
+    div[data-testid="stTabs"] button[data-baseweb="tab"]::after,
+    button[data-baseweb="tab"]::after,
+    div[data-testid="stTabs"] button[data-baseweb="tab"]::before,
+    button[data-baseweb="tab"]::before {
         display: none !important;
+        content: none !important;
+        border: none !important;
+    }
+
+    /* ── Form Container Frosted Glass ── */
+    div[data-testid="stForm"] {
+        background: rgba(20, 20, 26, 0.82) !important;
+        backdrop-filter: blur(48px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(48px) saturate(200%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 24px !important;
+        padding: 2.2rem !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
+                    0 24px 60px rgba(0, 0, 0, 0.6) !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Form Column Cards (Apple Inset Grouped style) */
+    div[data-testid="stForm"] div[data-testid="stColumn"] {
+        background: rgba(255, 255, 255, 0.03) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.07) !important;
+        border-radius: 18px !important;
+        padding: 1.4rem 1.6rem !important;
+    }
+
+    /* ── Streamlit Form Input Styling ── */
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="input"] > div {
+        background: rgba(30, 30, 36, 0.85) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 12px !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    div[data-baseweb="select"] > div:hover,
+    div[data-baseweb="input"] > div:hover {
+        border-color: rgba(255, 255, 255, 0.25) !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06) !important;
     }
 
     /* ── Section Title (Apple Style) ── */
@@ -198,15 +314,15 @@ st.markdown(
 
     /* ── Apple Health Widget Cards ── */
     .health-widget {
-        background: rgba(30, 30, 35, 0.65);
-        backdrop-filter: blur(35px) saturate(190%);
-        -webkit-backdrop-filter: blur(35px) saturate(190%);
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-radius: 20px;
+        background: rgba(22, 22, 28, 0.82) !important;
+        backdrop-filter: blur(45px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(45px) saturate(200%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
         padding: 1.6rem 1.4rem;
         text-align: center;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                    0 12px 28px rgba(0, 0, 0, 0.4);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
+                    0 16px 36px rgba(0, 0, 0, 0.5);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -270,19 +386,22 @@ st.markdown(
 
     /* ── Apple Metric Trends (Factor Contributions) ── */
     .trend-row {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(30, 30, 36, 0.75) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 12px;
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1.1rem;
         margin-bottom: 0.6rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        transition: background 0.2s ease;
+        transition: background 0.2s ease, border-color 0.2s ease;
     }
     .trend-row:hover {
-        background: rgba(255, 255, 255, 0.06);
+        background: rgba(36, 36, 44, 0.85) !important;
+        border-color: rgba(255, 255, 255, 0.14);
     }
     .trend-name {
         font-size: 0.88rem;
@@ -293,7 +412,7 @@ st.markdown(
     .trend-badge {
         font-size: 0.75rem;
         font-weight: 700;
-        padding: 3px 9px;
+        padding: 3px 10px;
         border-radius: 999px;
     }
     .trend-bar-bg {
@@ -333,7 +452,7 @@ st.markdown(
         transform: scale(0.985) !important;
     }
 
-    /* ── Summary Metric Pills Row ── */
+    /* ── Summary Metric Pills Row (Tab 2) ── */
     .apple-summary-grid {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
@@ -341,11 +460,15 @@ st.markdown(
         margin-bottom: 1.4rem;
     }
     .apple-summary-cell {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.07);
-        border-radius: 14px;
+        background: rgba(24, 24, 30, 0.82) !important;
+        backdrop-filter: blur(35px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 16px !important;
         padding: 0.9rem 0.6rem;
         text-align: center;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                    0 8px 20px rgba(0, 0, 0, 0.35);
     }
     .apple-summary-cell .cell-label {
         font-size: 0.68rem;
@@ -362,6 +485,27 @@ st.markdown(
         color: #F5F5F7;
     }
 
+    /* ── Apple DataFrame Container ── */
+    div[data-testid="stDataFrame"] {
+        background: rgba(20, 20, 26, 0.82) !important;
+        backdrop-filter: blur(40px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(40px) saturate(190%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 20px !important;
+        padding: 12px !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                    0 16px 40px rgba(0, 0, 0, 0.5) !important;
+        margin-bottom: 1.2rem !important;
+    }
+
+    /* ── Apple Alert Callouts (st.success, st.warning, st.info) ── */
+    div[data-testid="stAlert"] {
+        backdrop-filter: blur(30px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+        border-radius: 16px !important;
+        border-width: 1px !important;
+    }
+
     /* ── Apple Team Grid ── */
     .apple-team-grid {
         display: grid;
@@ -369,8 +513,10 @@ st.markdown(
         gap: 12px;
     }
     .apple-team-member {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: rgba(30, 30, 38, 0.78) !important;
+        backdrop-filter: blur(30px) !important;
+        -webkit-backdrop-filter: blur(30px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.09) !important;
         border-radius: 16px;
         padding: 1.2rem;
         display: flex;
@@ -380,7 +526,7 @@ st.markdown(
     }
     .apple-team-member:hover {
         transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.18) !important;
     }
     .apple-avatar {
         width: 46px;
@@ -393,7 +539,7 @@ st.markdown(
         font-size: 1rem;
         font-weight: 800;
         color: #FFFFFF;
-        box-shadow: 0 4px 14px rgba(255, 45, 85, 0.3);
+        box-shadow: 0 4px 14px rgba(255, 45, 85, 0.35);
     }
     .apple-team-info .name {
         font-size: 0.98rem;
@@ -407,20 +553,7 @@ st.markdown(
         margin-top: 2px;
     }
 
-    /* ── Streamlit Form Input Styling ── */
-    div[data-baseweb="select"] > div,
-    div[data-baseweb="input"] > div {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 12px !important;
-        transition: border-color 0.2s ease !important;
-    }
-    div[data-baseweb="select"] > div:hover,
-    div[data-baseweb="input"] > div:hover {
-        border-color: rgba(255, 255, 255, 0.22) !important;
-    }
-
-    /* Hide Streamlit default clutter */
+    /* Hide Streamlit default branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     </style>
@@ -616,12 +749,24 @@ tab1, tab2, tab3 = st.tabs([
 with tab1:
     st.markdown('<div class="apple-section-header"><span>📋</span> CLINICAL PROFILE INPUT</div>', unsafe_allow_html=True)
 
-    # Archetype Selector
+    # Archetype Selector wrapped in Frosted Glass Panel
+    st.markdown(
+        """
+        <div class="apple-card" style="padding: 1.1rem 1.6rem; margin-bottom: 1.4rem;">
+            <div class="apple-section-header" style="margin-bottom: 0.35rem;">
+                <span>⚡</span> QUICK PRESET ARCHETYPES (DEMO & VIVA PRESENTATION)
+            </div>
+        """,
+        unsafe_allow_html=True,
+    )
     preset_choice = st.selectbox(
-        "⚡ Quick Preset Archetypes (For Demo & Viva Presentation):",
+        "⚡ Quick Preset Archetypes:",
         list(PRESETS.keys()),
         index=0,
+        label_visibility="collapsed",
     )
+    st.markdown("</div>", unsafe_allow_html=True)
+
     preset_data = PRESETS[preset_choice]
     def _val(key, default):
         return preset_data[key] if preset_data and key in preset_data else default
@@ -754,20 +899,20 @@ with tab1:
             APPLE_TIERS = {
                 "Low": {
                     "primary": "#30D158",      # Apple Health Green
-                    "bg": "rgba(48, 209, 88, 0.12)",
-                    "border": "rgba(48, 209, 88, 0.35)",
+                    "bg": "rgba(48, 209, 88, 0.14)",
+                    "border": "rgba(48, 209, 88, 0.38)",
                     "tag": "NORMAL PROFILE",
                 },
                 "Moderate": {
                     "primary": "#FF9F0A",      # Apple Amber
-                    "bg": "rgba(255, 159, 10, 0.12)",
-                    "border": "rgba(255, 159, 10, 0.35)",
+                    "bg": "rgba(255, 159, 10, 0.14)",
+                    "border": "rgba(255, 159, 10, 0.38)",
                     "tag": "ELEVATED RISK",
                 },
                 "High": {
                     "primary": "#FF2D55",      # Apple Health Red
-                    "bg": "rgba(255, 45, 85, 0.14)",
-                    "border": "rgba(255, 45, 85, 0.4)",
+                    "bg": "rgba(255, 45, 85, 0.16)",
+                    "border": "rgba(255, 45, 85, 0.42)",
                     "tag": "HIGH RISK ALERT",
                 },
             }
@@ -783,7 +928,7 @@ with tab1:
                 st.markdown(
                     f"""
                     <div class="health-widget" style="border-color: {tier['border']}; background: {tier['bg']};">
-                        <div class="apple-pill-badge" style="background: rgba(255,255,255,0.08); border-color: {tier['border']}; color: {tier['primary']}; margin-bottom: 0.5rem;">
+                        <div class="apple-pill-badge" style="background: rgba(255,255,255,0.1); border-color: {tier['border']}; color: {tier['primary']}; margin-bottom: 0.5rem;">
                             {tier['tag']}
                         </div>
                         <div class="widget-value" style="color: {tier['primary']};">{lvl.upper()}</div>
@@ -795,7 +940,6 @@ with tab1:
 
             with w2:
                 # Apple Activity Ring SVG
-                # Circumference = 2 * PI * 58 = 364.42
                 circ = 364.42
                 stroke_dashoffset = circ - (prob * circ)
 
@@ -845,8 +989,18 @@ with tab1:
             contribs = res.get("contributions", {})
             if contribs:
                 st.markdown("<br>", unsafe_allow_html=True)
-                st.markdown('<div class="apple-section-header"><span>📈</span> PHYSIOLOGICAL RISK FACTOR CONTRIBUTIONS</div>', unsafe_allow_html=True)
-                st.caption("Derived from the trained Logistic Regression model coefficients scaled by this patient's transformed biomarkers.")
+                st.markdown(
+                    """
+                    <div class="apple-card" style="padding: 1.6rem 1.8rem; margin-bottom: 1rem;">
+                        <div class="apple-section-header" style="margin-bottom: 0.35rem;">
+                            <span>📈</span> PHYSIOLOGICAL RISK FACTOR CONTRIBUTIONS
+                        </div>
+                        <p style="color:#8E8E93; font-size:0.85rem; margin-top:0; margin-bottom:1rem;">
+                            Derived from the trained Logistic Regression model coefficients scaled by this patient's transformed biomarkers.
+                        </p>
+                    """,
+                    unsafe_allow_html=True,
+                )
 
                 max_val = max(abs(v) for v in contribs.values()) or 1.0
 
@@ -872,6 +1026,7 @@ with tab1:
                         """,
                         unsafe_allow_html=True,
                     )
+                st.markdown("</div>", unsafe_allow_html=True)
 
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
@@ -890,7 +1045,7 @@ with tab2:
         st.markdown(
             f"""
             <div class="apple-summary-grid">
-                <div class="apple-summary-cell" style="border-color: rgba(255, 45, 85, 0.4); background: rgba(255, 45, 85, 0.08);">
+                <div class="apple-summary-cell" style="border-color: rgba(255, 45, 85, 0.4); background: rgba(255, 45, 85, 0.1) !important;">
                     <div class="cell-label" style="color: #FF375F;">TOP MODEL</div>
                     <div class="cell-value" style="color: #FF375F; font-size: 1.05rem;">{best_row['Model']}</div>
                 </div>
@@ -910,7 +1065,7 @@ with tab2:
                     <div class="cell-label">ROC-AUC</div>
                     <div class="cell-value">{best_row['ROC-AUC']:.3f}</div>
                 </div>
-                <div class="apple-summary-cell" style="border-color: rgba(255, 159, 10, 0.4); background: rgba(255, 159, 10, 0.08);">
+                <div class="apple-summary-cell" style="border-color: rgba(255, 159, 10, 0.4); background: rgba(255, 159, 10, 0.1) !important;">
                     <div class="cell-label" style="color: #FF9F0A;">MISSED DIAGNOSES</div>
                     <div class="cell-value" style="color: #FF9F0A;">{int(best_row['False Negatives'])}</div>
                 </div>
@@ -928,10 +1083,10 @@ with tab2:
                 "ROC-AUC": "{:.3f}", "CV F1 (Mean)": "{:.3f}",
             }).highlight_max(
                 subset=["Accuracy", "Precision", "Recall", "F1-Score", "ROC-AUC"],
-                color="rgba(48, 209, 88, 0.22)",
+                color="rgba(48, 209, 88, 0.25)",
             ).highlight_min(
                 subset=["False Negatives"],
-                color="rgba(48, 209, 88, 0.22)",
+                color="rgba(48, 209, 88, 0.25)",
             ),
             use_container_width=True,
             hide_index=True,
@@ -955,21 +1110,27 @@ with tab2:
     fi_img = Path("reports/feature_importance.png")
 
     with c1:
+        st.markdown('<div class="apple-card" style="padding: 1.2rem; margin-bottom: 0;">', unsafe_allow_html=True)
         if roc_img.exists():
             st.image(str(roc_img), caption="Multi-Model ROC Curves Overlay (Test Set)", use_container_width=True)
         else:
             st.warning("ROC curves plot not found.")
+        st.markdown('</div>', unsafe_allow_html=True)
 
     with c2:
+        st.markdown('<div class="apple-card" style="padding: 1.2rem; margin-bottom: 0;">', unsafe_allow_html=True)
         if cm_img.exists():
             st.image(str(cm_img), caption="Normalized Confusion Matrix (Winning Pipeline)", use_container_width=True)
         else:
             st.warning("Confusion matrix plot not found.")
+        st.markdown('</div>', unsafe_allow_html=True)
 
     if fi_img.exists():
         st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown('<div class="apple-card" style="padding: 1.4rem;">', unsafe_allow_html=True)
         st.markdown("##### 🌲 Feature Importance & Predictive Markers")
         st.image(str(fi_img), caption="Top Clinical Predictive Markers in the Pipeline", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
