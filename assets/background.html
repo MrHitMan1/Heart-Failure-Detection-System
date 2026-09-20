@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    html, body { margin:0; padding:0; overflow:hidden; background:transparent; }
+    canvas { display:block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+(function(){
+    var f = window.frameElement;
+    if (f) {
+        f.style.cssText =
+            'position:fixed!important;top:0!important;left:0!important;' +
+            'width:100vw!important;height:100vh!important;z-index:0!important;' +
+            'pointer-events:none!important;border:none!important;background:transparent!important;';
+    }
+
+    var cv = document.getElementById('c');
+    var ctx = cv.getContext('2d');
+    var W, H, mx = -9999, my = -9999, orbs = [];
+
+    function resize(){ W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+
+    try {
+        window.parent.document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
+        window.parent.document.addEventListener('mouseleave', function(){ mx=-9999; my=-9999; });
+    } catch(e){
+        document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
+    }
+
+    /* Clinical Luminescence Palette: Heart Rose, Deep Violet, Warm Amber, System Cyan */
+    var colors = [
+        {r:255, g:45,  b:85},   /* Heart Rose */
+        {r:94,  g:92,  b:230},  /* Deep Violet */
+        {r:255, g:149, b:0},   /* Warm Amber */
+        {r:10,  g:132, b:255}   /* System Cyan */
+    ];
+
+    for(var i=0; i<85; i++){
+        var clr = colors[i % colors.length];
+        orbs.push({
+            x: Math.random()*2000,
+            y: Math.random()*2000,
+            baseRadius: Math.random()*3.5 + 1.8,
+            radius: Math.random()*3.5 + 1.8,
+            vx: (Math.random()-0.5)*0.35,
+            vy: (Math.random()-0.5)*0.35,
+            color: clr,
+            alpha: 0.38 + Math.random()*0.38
+        });
+    }
+
+    function render(){
+        ctx.clearRect(0,0,W,H);
+
+        for(var i=0; i<orbs.length; i++){
+            var o = orbs[i];
+            var dx = mx - o.x;
+            var dy = my - o.y;
+            var dist = Math.sqrt(dx*dx + dy*dy) || 1;
+
+            if(dist < 280){
+                var f = (280 - dist)/280 * 0.018;
+                o.vx += dx/dist * f;
+                o.vy += dy/dist * f;
+                o.radius = o.baseRadius + (280 - dist)/280 * 3.0;
+            } else {
+                o.radius += (o.baseRadius - o.radius) * 0.05;
+            }
+
+            o.vx *= 0.992;
+            o.vy *= 0.992;
+            o.x += o.vx;
+            o.y += o.vy;
+
+            if(o.x < -20) o.x = W + 20;
+            if(o.x > W + 20) o.x = -20;
+            if(o.y < -20) o.y = H + 20;
+            if(o.y > H + 20) o.y = -20;
+
+            /* Soft glowing orb */
+            ctx.beginPath();
+            ctx.arc(o.x, o.y, o.radius, 0, Math.PI*2);
+            ctx.fillStyle = 'rgba('+o.color.r+','+o.color.g+','+o.color.b+','+o.alpha+')';
+            ctx.fill();
+        }
+
+        /* Ambient connection mesh */
+        for(var i=0; i<orbs.length; i++){
+            for(var j=i+1; j<orbs.length; j++){
+                var a = orbs[i], b = orbs[j];
+                var d = Math.hypot(a.x-b.x, a.y-b.y);
+                if(d < 140){
+                    var md = Math.min(Math.hypot(a.x-mx, a.y-my), Math.hypot(b.x-mx, b.y-my));
+                    var alpha = (1 - d/140) * (md < 240 ? 0.28 : 0.07);
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.strokeStyle = 'rgba(255, 45, 85, ' + alpha + ')';
+                    ctx.lineWidth = 0.75;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(render);
+    }
+    render();
+})();
+</script>
+</body>
+</html>
