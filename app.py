@@ -43,12 +43,12 @@ st.markdown(
 
     /* ── Apple Glassmorphic Card (Translucent Acrylic / Vibrancy) ── */
     .apple-card {
-        background: rgba(22, 22, 28, 0.82) !important;
-        backdrop-filter: blur(45px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(45px) saturate(200%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.11) !important;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
-                    0 20px 48px rgba(0, 0, 0, 0.55) !important;
+        background: rgba(20, 20, 26, 0.50) !important;
+        backdrop-filter: blur(30px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                    0 16px 40px rgba(0, 0, 0, 0.45) !important;
         border-radius: 22px !important;
         padding: 1.8rem 2rem;
         margin-bottom: 1.4rem;
@@ -57,19 +57,19 @@ st.markdown(
                     box-shadow 0.25s ease;
     }
     .apple-card:hover {
-        border-color: rgba(255, 255, 255, 0.18) !important;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                    0 24px 54px rgba(0, 0, 0, 0.65) !important;
+        border-color: rgba(255, 255, 255, 0.22) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                    0 20px 48px rgba(0, 0, 0, 0.55) !important;
     }
 
     /* ── Apple Health Hero Header ── */
     .apple-hero {
-        background: linear-gradient(180deg, rgba(32, 32, 38, 0.85) 0%, rgba(18, 18, 22, 0.9) 100%) !important;
-        backdrop-filter: blur(50px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(50px) saturate(200%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.13) !important;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
-                    0 28px 56px rgba(0, 0, 0, 0.65) !important;
+        background: linear-gradient(180deg, rgba(28, 28, 36, 0.54) 0%, rgba(14, 14, 18, 0.60) 100%) !important;
+        backdrop-filter: blur(35px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.14) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                    0 24px 50px rgba(0, 0, 0, 0.55) !important;
         border-radius: 26px !important;
         padding: 2.2rem 2.6rem;
         margin-bottom: 1.5rem;
@@ -262,22 +262,22 @@ st.markdown(
 
     /* ── Form Container Frosted Glass ── */
     div[data-testid="stForm"] {
-        background: rgba(20, 20, 26, 0.82) !important;
-        backdrop-filter: blur(48px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(48px) saturate(200%) !important;
+        background: rgba(18, 18, 24, 0.48) !important;
+        backdrop-filter: blur(30px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
         border-radius: 24px !important;
         padding: 2.2rem !important;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
-                    0 24px 60px rgba(0, 0, 0, 0.6) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                    0 20px 50px rgba(0, 0, 0, 0.5) !important;
         margin-bottom: 1.5rem !important;
     }
 
     /* Form Column Cards (Apple Inset Grouped style) */
     div[data-testid="stForm"] div[data-testid="stColumn"] {
-        background: rgba(255, 255, 255, 0.03) !important;
-        backdrop-filter: blur(25px) !important;
-        -webkit-backdrop-filter: blur(25px) !important;
+        background: rgba(255, 255, 255, 0.035) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
         border: 1px solid rgba(255, 255, 255, 0.07) !important;
         border-radius: 18px !important;
         padding: 1.4rem 1.6rem !important;
@@ -286,17 +286,17 @@ st.markdown(
     /* ── Streamlit Form Input Styling ── */
     div[data-baseweb="select"] > div,
     div[data-baseweb="input"] > div {
-        background: rgba(30, 30, 36, 0.85) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: rgba(26, 26, 32, 0.60) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.14) !important;
         border-radius: 12px !important;
         transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
     }
     div[data-baseweb="select"] > div:hover,
     div[data-baseweb="input"] > div:hover {
-        border-color: rgba(255, 255, 255, 0.25) !important;
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06) !important;
+        border-color: rgba(255, 255, 255, 0.28) !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08) !important;
     }
 
     /* ── Section Title (Apple Style) ── */
@@ -314,15 +314,15 @@ st.markdown(
 
     /* ── Apple Health Widget Cards ── */
     .health-widget {
-        background: rgba(22, 22, 28, 0.82) !important;
-        backdrop-filter: blur(45px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(45px) saturate(200%) !important;
+        background: rgba(18, 18, 24, 0.52) !important;
+        backdrop-filter: blur(30px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 22px;
         padding: 1.6rem 1.4rem;
         text-align: center;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
-                    0 16px 36px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
+                    0 16px 36px rgba(0, 0, 0, 0.45);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -386,9 +386,9 @@ st.markdown(
 
     /* ── Apple Metric Trends (Factor Contributions) ── */
     .trend-row {
-        background: rgba(30, 30, 36, 0.75) !important;
-        backdrop-filter: blur(25px) !important;
-        -webkit-backdrop-filter: blur(25px) !important;
+        background: rgba(26, 26, 34, 0.50) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 12px;
         padding: 0.75rem 1.1rem;
@@ -400,8 +400,8 @@ st.markdown(
         transition: background 0.2s ease, border-color 0.2s ease;
     }
     .trend-row:hover {
-        background: rgba(36, 36, 44, 0.85) !important;
-        border-color: rgba(255, 255, 255, 0.14);
+        background: rgba(36, 36, 44, 0.65) !important;
+        border-color: rgba(255, 255, 255, 0.16);
     }
     .trend-name {
         font-size: 0.88rem;
@@ -460,15 +460,15 @@ st.markdown(
         margin-bottom: 1.4rem;
     }
     .apple-summary-cell {
-        background: rgba(24, 24, 30, 0.82) !important;
-        backdrop-filter: blur(35px) saturate(190%) !important;
-        -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
+        background: rgba(20, 20, 26, 0.50) !important;
+        backdrop-filter: blur(25px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 16px !important;
         padding: 0.9rem 0.6rem;
         text-align: center;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
-                    0 8px 20px rgba(0, 0, 0, 0.35);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
+                    0 8px 20px rgba(0, 0, 0, 0.3);
     }
     .apple-summary-cell .cell-label {
         font-size: 0.68rem;
@@ -487,21 +487,21 @@ st.markdown(
 
     /* ── Apple DataFrame Container ── */
     div[data-testid="stDataFrame"] {
-        background: rgba(20, 20, 26, 0.82) !important;
-        backdrop-filter: blur(40px) saturate(190%) !important;
-        -webkit-backdrop-filter: blur(40px) saturate(190%) !important;
+        background: rgba(18, 18, 24, 0.50) !important;
+        backdrop-filter: blur(28px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 20px !important;
         padding: 12px !important;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
-                    0 16px 40px rgba(0, 0, 0, 0.5) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
+                    0 16px 40px rgba(0, 0, 0, 0.45) !important;
         margin-bottom: 1.2rem !important;
     }
 
     /* ── Apple Alert Callouts (st.success, st.warning, st.info) ── */
     div[data-testid="stAlert"] {
-        backdrop-filter: blur(30px) saturate(190%) !important;
-        -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+        backdrop-filter: blur(25px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(25px) saturate(190%) !important;
         border-radius: 16px !important;
         border-width: 1px !important;
     }
@@ -513,10 +513,10 @@ st.markdown(
         gap: 12px;
     }
     .apple-team-member {
-        background: rgba(30, 30, 38, 0.78) !important;
-        backdrop-filter: blur(30px) !important;
-        -webkit-backdrop-filter: blur(30px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.09) !important;
+        background: rgba(24, 24, 32, 0.52) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 16px;
         padding: 1.2rem;
         display: flex;
@@ -526,7 +526,7 @@ st.markdown(
     }
     .apple-team-member:hover {
         transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.18) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
     }
     .apple-avatar {
         width: 46px;
@@ -602,17 +602,17 @@ _APPLE_FLUID_BG = """
         {r:10,  g:132, b:255}   /* Apple System Blue */
     ];
 
-    for(var i=0; i<65; i++){
+    for(var i=0; i<85; i++){
         var clr = colors[i % colors.length];
         orbs.push({
             x: Math.random()*2000,
             y: Math.random()*2000,
-            baseRadius: Math.random()*3 + 1.2,
-            radius: Math.random()*3 + 1.2,
-            vx: (Math.random()-0.5)*0.32,
-            vy: (Math.random()-0.5)*0.32,
+            baseRadius: Math.random()*3.5 + 1.8,
+            radius: Math.random()*3.5 + 1.8,
+            vx: (Math.random()-0.5)*0.35,
+            vy: (Math.random()-0.5)*0.35,
             color: clr,
-            alpha: 0.22 + Math.random()*0.28
+            alpha: 0.38 + Math.random()*0.38
         });
     }
 
@@ -626,10 +626,10 @@ _APPLE_FLUID_BG = """
             var dist = Math.sqrt(dx*dx + dy*dy) || 1;
 
             if(dist < 280){
-                var f = (280 - dist)/280 * 0.016;
+                var f = (280 - dist)/280 * 0.018;
                 o.vx += dx/dist * f;
                 o.vy += dy/dist * f;
-                o.radius = o.baseRadius + (280 - dist)/280 * 2.5;
+                o.radius = o.baseRadius + (280 - dist)/280 * 3.0;
             } else {
                 o.radius += (o.baseRadius - o.radius) * 0.05;
             }
@@ -656,14 +656,14 @@ _APPLE_FLUID_BG = """
             for(var j=i+1; j<orbs.length; j++){
                 var a = orbs[i], b = orbs[j];
                 var d = Math.hypot(a.x-b.x, a.y-b.y);
-                if(d < 130){
+                if(d < 140){
                     var md = Math.min(Math.hypot(a.x-mx, a.y-my), Math.hypot(b.x-mx, b.y-my));
-                    var alpha = (1 - d/130) * (md < 240 ? 0.18 : 0.035);
+                    var alpha = (1 - d/140) * (md < 240 ? 0.28 : 0.07);
                     ctx.beginPath();
                     ctx.moveTo(a.x, a.y);
                     ctx.lineTo(b.x, b.y);
                     ctx.strokeStyle = 'rgba(255, 45, 85, ' + alpha + ')';
-                    ctx.lineWidth = 0.65;
+                    ctx.lineWidth = 0.75;
                     ctx.stroke();
                 }
             }
