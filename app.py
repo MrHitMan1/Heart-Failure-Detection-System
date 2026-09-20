@@ -283,20 +283,107 @@ st.markdown(
         padding: 1.4rem 1.6rem !important;
     }
 
-    /* ── Streamlit Form Input Styling ── */
+    /* ── Streamlit Form Input Styling (Apple Elevated Surfaces) ── */
+    /* Labels */
+    div[data-testid="stWidgetLabel"] p,
+    label[data-testid="stWidgetLabel"] {
+        color: #F5F5F7 !important;
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        margin-bottom: 0.35rem !important;
+        letter-spacing: -0.01em !important;
+    }
+
+    /* Distinct Input Containers (Select & Number Inputs) */
     div[data-baseweb="select"] > div,
     div[data-baseweb="input"] > div {
-        background: rgba(26, 26, 32, 0.60) !important;
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.14) !important;
+        background: rgba(255, 255, 255, 0.09) !important;
+        background-color: rgba(255, 255, 255, 0.09) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.20) !important;
         border-radius: 12px !important;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35),
+                    0 1px 0 rgba(255, 255, 255, 0.08) !important;
+        transition: all 0.2s ease !important;
     }
+
+    /* Hover State */
     div[data-baseweb="select"] > div:hover,
     div[data-baseweb="input"] > div:hover {
-        border-color: rgba(255, 255, 255, 0.28) !important;
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08) !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        border-color: rgba(255, 255, 255, 0.32) !important;
+    }
+
+    /* Focus State: Soft Apple Halo Glow (replacing harsh thin red line) */
+    div[data-baseweb="input"]:focus-within > div,
+    div[data-baseweb="input"] > div:focus-within,
+    div[data-baseweb="select"]:focus-within > div {
+        background: rgba(255, 255, 255, 0.13) !important;
+        background-color: rgba(255, 255, 255, 0.13) !important;
+        border-color: rgba(255, 45, 85, 0.85) !important;
+        box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.28),
+                    inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Input text color & weight */
+    div[data-baseweb="input"] input {
+        color: #FFFFFF !important;
+        font-size: 0.96rem !important;
+        font-weight: 500 !important;
+    }
+
+    /* Tactile Stepper Buttons (+ and -) */
+    button[data-testid="stNumberInputStepDown"],
+    button[data-testid="stNumberInputStepUp"] {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        margin: 2px !important;
+        color: #C7C7CC !important;
+        transition: all 0.15s ease !important;
+    }
+    button[data-testid="stNumberInputStepDown"]:hover,
+    button[data-testid="stNumberInputStepUp"]:hover {
+        background: rgba(255, 255, 255, 0.18) !important;
+        color: #FFFFFF !important;
+    }
+
+    /* Make 'Press Enter to submit form' discreet and less obvious */
+    div[data-testid="InputInstructions"],
+    [data-testid="InputInstructions"],
+    [data-testid="stInputInstructions"] {
+        opacity: 0.22 !important;
+        font-size: 0.65rem !important;
+        color: #8E8E93 !important;
+        font-style: italic !important;
+        letter-spacing: -0.01em !important;
+        transition: opacity 0.2s ease !important;
+    }
+    div[data-testid="InputInstructions"] * {
+        color: #8E8E93 !important;
+        font-size: 0.65rem !important;
+    }
+    div[data-baseweb="input"]:focus-within [data-testid="InputInstructions"],
+    div[data-baseweb="input"]:hover [data-testid="InputInstructions"] {
+        opacity: 0.40 !important;
+    }
+
+    /* Slider Container Distinction */
+    div[data-testid="stSlider"] {
+        background: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.09) !important;
+        border-radius: 14px !important;
+        padding: 0.65rem 1rem 0.4rem 1rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    /* Checkbox Container Distinction */
+    div[data-testid="stCheckbox"] {
+        background: rgba(255, 255, 255, 0.04) !important;
+        border: 1px solid rgba(255, 255, 255, 0.09) !important;
+        border-radius: 12px !important;
+        padding: 0.75rem 1rem !important;
     }
 
     /* ── Section Title (Apple Style) ── */
