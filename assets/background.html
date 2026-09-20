@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-<canvas id="telemetryCanvas"></canvas>
+<canvas id="atlasCanvas"></canvas>
 <script>
 (function(){
     var f = window.frameElement;
@@ -30,7 +30,7 @@
             'pointer-events:none!important;border:none!important;background:transparent!important;';
     }
 
-    var cv = document.getElementById('telemetryCanvas');
+    var cv = document.getElementById('atlasCanvas');
     var ctx = cv.getContext('2d');
     var W = 0, H = 0;
     var dpr = window.devicePixelRatio || 1;
@@ -40,206 +40,102 @@
         H = window.innerHeight;
         cv.width = W * dpr;
         cv.height = H * dpr;
-        ctx.scale(dpr, dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     window.addEventListener('resize', resize);
     resize();
 
-    // Mouse tracking for bio-electric telemetry echoes
-    var mx = -9999, my = -9999;
-    var echoes = [];
+    // Anatomical section rings — like stained histological cross-sections
+    // Slow, meditative drift anchored to two focal points
+    var rings = [];
+    var RING_COUNT = 7;
 
-    try {
-        window.parent.document.addEventListener('mousemove', function(e){
-            mx = e.clientX;
-            my = e.clientY;
-            if (Math.random() < 0.18) {
-                echoes.push({ x: mx, y: my, r: 4, alpha: 0.45, maxR: 70 + Math.random()*50 });
-            }
-        });
-        window.parent.document.addEventListener('mouseleave', function(){
-            mx = -9999; my = -9999;
-        });
-    } catch(e){
-        document.addEventListener('mousemove', function(e){
-            mx = e.clientX; my = e.clientY;
+    // Two focal points: upper-right and lower-left (like Fibonacci spirals in cardiac anatomy)
+    var foci = [
+        { x: 0.78, y: 0.18 },
+        { x: 0.22, y: 0.82 }
+    ];
+
+    for (var i = 0; i < RING_COUNT; i++) {
+        var focal = foci[i % 2];
+        rings.push({
+            fx: focal.x,
+            fy: focal.y,
+            radius: 80 + i * 110,
+            phase: (i / RING_COUNT) * Math.PI * 2,
+            speed: 0.00006 + i * 0.000012,
+            opacity: 0.028 - i * 0.0018,
+            strokeWidth: 0.8 + (RING_COUNT - i) * 0.15
         });
     }
 
-    // Authentic ECG Lead II P-Q-R-S-T generator
-    // Returns vertical displacement (positive = upwards in clinical display)
-    function getEcgY(phase) {
-        // phase in [0, 1)
-        if (phase < 0.12) return 0;
-        // P wave (atrial depolarization)
-        if (phase >= 0.12 && phase < 0.22) {
-            var p = (phase - 0.12) / 0.10;
-            return Math.sin(p * Math.PI) * 9;
-        }
-        // PR segment
-        if (phase >= 0.22 && phase < 0.30) return 0;
-        // Q dip
-        if (phase >= 0.30 && phase < 0.34) {
-            var q = (phase - 0.30) / 0.04;
-            return -Math.sin(q * Math.PI) * 7;
-        }
-        // R spike (ventricular depolarization)
-        if (phase >= 0.34 && phase < 0.40) {
-            var r = (phase - 0.34) / 0.06;
-            return Math.sin(r * Math.PI) * 62;
-        }
-        // S dip
-        if (phase >= 0.40 && phase < 0.45) {
-            var s = (phase - 0.40) / 0.05;
-            return -Math.sin(s * Math.PI) * 16;
-        }
-        // ST segment
-        if (phase >= 0.45 && phase < 0.54) return 0;
-        // T wave (ventricular repolarization)
-        if (phase >= 0.54 && phase < 0.70) {
-            var t = (phase - 0.54) / 0.16;
-            return Math.sin(t * Math.PI) * 16;
-        }
-        // TP baseline
-        return 0;
-    }
+    // Fine meridian lines — like an anatomical atlas grid (not a telemetry grid)
+    // Sparse, diagonal, very faint — like ruled manuscript paper
+    function drawAtlasLines() {
+        var lineSpacing = 60;
+        ctx.strokeStyle = 'rgba(26, 31, 46, 0.028)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
 
-    var sweepX = 0;
-    var sweepSpeed = 2.4; // px per frame
-    var period = 260;     // wavelength of one cardiac cycle in pixels
-    var lastTime = performance.now();
+        // Horizontal ruled lines
+        for (var y = 0; y < H; y += lineSpacing) {
+            ctx.moveTo(0, y);
+            ctx.lineTo(W, y);
+        }
+        ctx.stroke();
 
-    // 2 channel baselines: channel 1 across upper third, channel 2 across lower third
-    function drawGrid() {
-        ctx.strokeStyle = 'rgba(0, 242, 254, 0.025)';
+        // Single vertical margin line (left-aligned atlas layout)
+        ctx.strokeStyle = 'rgba(139, 26, 74, 0.06)';
         ctx.lineWidth = 1;
-
-        // Minor grid
-        var step = 32;
         ctx.beginPath();
-        for (var x = 0; x < W; x += step) {
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, H);
-        }
-        for (var y = 0; y < H; y += step) {
-            ctx.moveTo(0, y);
-            ctx.lineTo(W, y);
-        }
-        ctx.stroke();
-
-        // Major telemetry markers every 160px
-        ctx.strokeStyle = 'rgba(0, 242, 254, 0.055)';
-        ctx.beginPath();
-        for (var x = 0; x < W; x += 160) {
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, H);
-        }
-        for (var y = 0; y < H; y += 160) {
-            ctx.moveTo(0, y);
-            ctx.lineTo(W, y);
-        }
+        ctx.moveTo(32, 0);
+        ctx.lineTo(32, H);
         ctx.stroke();
     }
+
+    var t = 0;
+    var lastTime = performance.now();
 
     function render(now) {
         var dt = (now - lastTime) / 1000;
         lastTime = now;
+        t += dt;
 
         ctx.clearRect(0, 0, W, H);
 
-        drawGrid();
+        drawAtlasLines();
 
-        // Channels: Y positions
-        var channels = [
-            { y: H * 0.28, color: '#00F2FE', glow: 'rgba(0, 242, 254, 0.45)', lead: 'LEAD II · SINUS RHYTHM' },
-            { y: H * 0.74, color: '#FF1E44', glow: 'rgba(255, 30, 68, 0.40)', lead: 'LEAD V5 · CORONARY PERFUSION' }
-        ];
+        // Draw anatomical section rings
+        for (var i = 0; i < rings.length; i++) {
+            var ring = rings[i];
+            var phase = ring.phase + t * ring.speed * Math.PI * 2;
 
-        sweepX = (sweepX + sweepSpeed) % (W + 80);
+            // Focal point slowly drifts in a small ellipse (breathing motion)
+            var breathX = ring.fx * W + Math.cos(phase * 0.7) * 18;
+            var breathY = ring.fy * H + Math.sin(phase * 0.5) * 12;
 
-        for (var c = 0; c < channels.length; c++) {
-            var ch = channels[c];
-            var baseY = ch.y;
+            // Elliptical ring (anatomical cross-sections are never perfect circles)
+            var rx = ring.radius;
+            var ry = ring.radius * 0.72;
+            var rotation = phase * 0.08;
 
-            // Draw faint telemetry channel header
-            ctx.font = '10px "JetBrains Mono", monospace';
-            ctx.fillStyle = 'rgba(130, 144, 164, 0.35)';
-            ctx.fillText(ch.lead, 28, baseY - 38);
-
-            // Phosphor decay trail of the ECG wave
-            var trailLength = Math.min(W * 0.85, 700);
-
-            ctx.lineWidth = 1.6;
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = ch.glow;
-
-            for (var dx = trailLength; dx >= 0; dx -= 2) {
-                var x1 = sweepX - dx;
-                var x2 = sweepX - dx + 2;
-
-                if (x1 < 0) continue;
-
-                var alpha = Math.pow(1 - (dx / trailLength), 1.8) * 0.65;
-                if (dx < 12) alpha = 0.95; // bright sweep head
-
-                var phase1 = ((x1 % period) + period) % period / period;
-                var phase2 = ((x2 % period) + period) % period / period;
-
-                var y1 = baseY - getEcgY(phase1);
-                var y2 = baseY - getEcgY(phase2);
-
-                // Subtle cursor gravitational disturbance
-                if (mx > -1000) {
-                    var cdist = Math.hypot(x1 - mx, y1 - my);
-                    if (cdist < 180) {
-                        var push = (1 - cdist/180) * 14 * Math.sin(now * 0.005 + x1 * 0.05);
-                        y1 += push;
-                        y2 += push;
-                    }
-                }
-
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.strokeStyle = ch.color;
-                ctx.globalAlpha = alpha;
-                ctx.stroke();
-            }
-
-            // Glowing sweep point head (pulsing dot)
-            var curPhase = ((sweepX % period) + period) % period / period;
-            var curY = baseY - getEcgY(curPhase);
-            ctx.globalAlpha = 1.0;
+            ctx.save();
+            ctx.translate(breathX, breathY);
+            ctx.rotate(rotation);
             ctx.beginPath();
-            ctx.arc(sweepX, curY, 3, 0, Math.PI * 2);
-            ctx.fillStyle = '#FFFFFF';
-            ctx.shadowColor = ch.color;
-            ctx.shadowBlur = 14;
-            ctx.fill();
-        }
-
-        // Draw mouse bio-electric pulse echoes
-        for (var i = echoes.length - 1; i >= 0; i--) {
-            var ec = echoes[i];
-            ec.r += 1.8;
-            ec.alpha *= 0.94;
-
-            ctx.beginPath();
-            ctx.arc(ec.x, ec.y, ec.r, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(0, 242, 254, ' + ec.alpha + ')';
-            ctx.lineWidth = 1.2;
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = 'rgba(0, 242, 254, 0.4)';
-            ctx.globalAlpha = ec.alpha;
+            ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(139, 26, 74, ' + Math.max(0, ring.opacity) + ')';
+            ctx.lineWidth = ring.strokeWidth;
             ctx.stroke();
-
-            if (ec.alpha < 0.02 || ec.r > ec.maxR) {
-                echoes.splice(i, 1);
-            }
+            ctx.restore();
         }
 
-        ctx.globalAlpha = 1.0;
-        ctx.shadowBlur = 0;
+        // Burgundy gradient bloom at upper right (single warm radial wash)
+        var grd = ctx.createRadialGradient(W * 0.85, H * 0.05, 0, W * 0.85, H * 0.05, W * 0.45);
+        grd.addColorStop(0, 'rgba(139, 26, 74, 0.032)');
+        grd.addColorStop(1, 'rgba(139, 26, 74, 0)');
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, W, H);
 
         requestAnimationFrame(render);
     }

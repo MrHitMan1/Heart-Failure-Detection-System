@@ -51,26 +51,26 @@ PRESETS = {
     },
 }
 
-# ── Hero Telemetry Deck ────────────────────────────────────────────────────────
+# ── Hero Atlas Cover ───────────────────────────────────────────────────────────
 st.markdown(
     """
     <div class="hero-card">
-        <div class="telemetry-status-row">
-            <div class="telemetry-beacon-chip">
-                <span class="beacon-dot"></span>
-                <span>BIO-TELEMETRY INFERENCE ENGINE // ONLINE</span>
-            </div>
-            <div class="telemetry-specs">
-                <span>COHORT N=918</span> · <span>5 CLINICAL REGISTRIES</span> · <span>DIAGNOSTIC RECALL: 93.1%</span>
-            </div>
+        <div class="atlas-classification">
+            <span class="classification-label">CardioSense · SCT Edition · Clinical Decision Support</span>
+            <span class="classification-divider"></span>
+            <span class="live-indicator">
+                <span class="live-dot"></span>
+                Inference ready
+            </span>
         </div>
         <div class="hero-title">
             <span class="heart-emoji">🫀</span>
-            <span class="title-text">CardioSense</span>
+            <span>Cardio<span class="title-accent">Sense</span></span>
         </div>
         <p class="hero-subtitle">
-            Precision clinical decision-support telemetry predicting heart failure risk from 11 multivariable biomarkers.
-            Tuned with Stratified 5-Fold Cross-Validation, prioritizing diagnostic sensitivity to eliminate false negatives.
+            Precision clinical decision-support for heart failure risk prediction across
+            <em>11 multivariable biomarkers</em> — trained on a synthesised cohort of 918 patients
+            from five international registries, tuned for diagnostic sensitivity.
         </p>
     </div>
     """,
@@ -83,9 +83,9 @@ st.markdown(
     <div class="clinical-notice">
         <span>⚠️</span>
         <div>
-            <strong>Clinical Protocol Notice:</strong>
-            This software is an investigational decision-support prototype calibrated strictly for clinician risk triage.
-            It operates as an adjunct to, and does not replace, 12-lead ECG telemetry, serum troponin assay, or coronary angiography.
+            <strong>Notice:</strong>
+            This is an investigational decision-support prototype for clinician risk triage only.
+            It does not replace 12-lead ECG telemetry, serum troponin assay, or coronary angiography.
         </div>
     </div>
     """,
@@ -94,21 +94,21 @@ st.markdown(
 
 # ── Navigation Tabs ────────────────────────────────────────────────────────────
 tab1, tab2, tab3 = st.tabs([
-    "  🩺  01 // PATIENT TRIAGE  ",
-    "  📊  02 // BENCHMARK MATRIX  ",
-    "  ℹ️  03 // CLINICAL PROTOCOL & TEAM  ",
+    "  🩺  Patient Risk Assessment  ",
+    "  📊  Model Benchmarks  ",
+    "  ℹ️  Dataset & Team  ",
 ])
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║  TAB 1 — PATIENT RISK ASSESSMENT                                          ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 with tab1:
-    st.markdown('<div class="section-header"><span>📋</span> CLINICAL PROFILE INPUT</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header"><span>📋</span> Clinical profile input</div>', unsafe_allow_html=True)
 
     # Archetype Selector
     st.markdown(
         '<div class="section-header" style="margin-bottom: 0.5rem;">'
-        '<span>⚡</span> QUICK PRESET ARCHETYPES (DEMO & VIVA PRESENTATION)'
+        '<span>⚡</span> Quick preset archetypes'
         '</div>',
         unsafe_allow_html=True,
     )
@@ -224,7 +224,7 @@ with tab1:
             )
             st_slope = slope_mapping[slope_choice]
 
-        submit_assessment = st.form_submit_button("⚡  EXECUTE MULTIVARIABLE RISK INFERENCE", width="stretch")
+        submit_assessment = st.form_submit_button("Assess cardiac risk", width="stretch")
 
     # ── Assessment Results (Clinical Dashboard) ──
     if submit_assessment:
@@ -239,7 +239,7 @@ with tab1:
         if predictor is None:
             st.error("❌ Production pipeline not found. Please execute `python src/train.py` first.")
         else:
-            with st.spinner("Processing clinical markers with Logistic Regression pipeline…"):
+            with st.spinner("Processing clinical markers…"):
                 res = predictor.predict(patient_dict)
 
             prob = res["probability"]
@@ -247,31 +247,32 @@ with tab1:
             lvl = res["risk_level"]
             diag = res["diagnosis"]
 
-            # Clinical Telemetry Palette per Risk Tier
+            # Risk palette adapted for light parchment background
             RISK_TIERS = {
                 "Low": {
-                    "primary": "#00E676",      # Bioluminescent Emerald
-                    "bg": "rgba(0, 230, 118, 0.10)",
-                    "border": "rgba(0, 230, 118, 0.40)",
-                    "tag": "NORMAL // LOW RISK",
+                    "primary": "#2C7A4B",      # Forest green
+                    "bg": "rgba(44, 122, 75, 0.08)",
+                    "border": "rgba(44, 122, 75, 0.30)",
+                    "tag": "Low risk",
                 },
                 "Moderate": {
-                    "primary": "#FFB300",      # Solar Amber
-                    "bg": "rgba(255, 179, 0, 0.10)",
-                    "border": "rgba(255, 179, 0, 0.40)",
-                    "tag": "ELEVATED // CAUTION",
+                    "primary": "#9B6300",      # Deep amber
+                    "bg": "rgba(155, 99, 0, 0.08)",
+                    "border": "rgba(155, 99, 0, 0.30)",
+                    "tag": "Elevated risk",
                 },
                 "High": {
-                    "primary": "#FF1E44",      # Arterial Crimson
-                    "bg": "rgba(255, 30, 68, 0.14)",
-                    "border": "rgba(255, 30, 68, 0.50)",
-                    "tag": "CRITICAL // HIGH RISK",
+                    "primary": "#C93528",      # Vital red
+                    "bg": "rgba(201, 53, 40, 0.10)",
+                    "border": "rgba(201, 53, 40, 0.35)",
+                    "tag": "High risk",
                 },
             }
             tier = RISK_TIERS[lvl]
 
             st.markdown("---")
-            st.markdown('<div class="section-header"><span>📊</span> RISK ASSESSMENT DASHBOARD</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-header"><span>📊</span> Risk assessment</div>', unsafe_allow_html=True)
+
 
             # 3-Column Diagnostic Widget Row
             w1, w2, w3 = st.columns([1.2, 1.2, 1.8], gap="medium")
@@ -280,11 +281,11 @@ with tab1:
                 st.markdown(
                     f"""
                     <div class="health-widget" style="border-color: {tier['border']}; background: {tier['bg']};">
-                        <div class="telemetry-beacon-chip" style="background: rgba(255,255,255,0.06); border-color: {tier['border']}; color: {tier['primary']}; margin-bottom: 0.6rem;">
+                        <div class="telemetry-beacon-chip" style="background: rgba(26,31,46,0.06); border: 1px solid {tier['border']}; color: {tier['primary']}; margin-bottom: 0.6rem;">
                             {tier['tag']}
                         </div>
-                        <div class="widget-value" style="color: {tier['primary']}; font-family: var(--font-display);">{lvl.upper()}</div>
-                        <p class="widget-caption" style="color: #F1F5F9; font-weight: 500;">{diag}</p>
+                        <div class="widget-value" style="color: {tier['primary']};">{lvl}</div>
+                        <p class="widget-caption" style="color: #4A4048; font-weight: 500;">{diag}</p>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -298,22 +299,22 @@ with tab1:
                 st.markdown(
                     f"""
                     <div class="health-widget">
-                        <div class="widget-label">CARDIAC RISK PROBABILITY</div>
+                        <div class="widget-label">Cardiac risk probability</div>
                         <div class="ring-container">
-                            <svg width="152" height="152" viewBox="0 0 152 152">
-                                <circle cx="76" cy="76" r="58" stroke="rgba(255, 255, 255, 0.08)" stroke-width="12" fill="none" />
-                                <circle cx="76" cy="76" r="58" stroke="{tier['primary']}" stroke-width="12" fill="none"
+                            <svg width="148" height="148" viewBox="0 0 148 148">
+                                <circle cx="74" cy="74" r="56" stroke="rgba(26, 31, 46, 0.10)" stroke-width="10" fill="none" />
+                                <circle cx="74" cy="74" r="56" stroke="{tier['primary']}" stroke-width="10" fill="none"
                                         stroke-linecap="round"
                                         stroke-dasharray="{circ}"
                                         stroke-dashoffset="{stroke_dashoffset}"
-                                        style="transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 0 8px {tier['primary']});" />
+                                        style="transition: stroke-dashoffset 0.8s ease;" />
                             </svg>
                             <div class="ring-center-content">
-                                <div class="ring-percent" style="color: {tier['primary']}; font-family: var(--font-mono);">{pct:.1f}<span style="font-size: 1.1rem; font-weight: 700;">%</span></div>
-                                <div class="ring-subtext">PROBABILITY</div>
+                                <div class="ring-percent" style="color: {tier['primary']};">{pct:.1f}<span style="font-size: 1rem; font-weight: 400;">%</span></div>
+                                <div class="ring-subtext">probability</div>
                             </div>
                         </div>
-                        <p class="widget-caption" style="font-size: 0.72rem; color: #8290A4; font-family: var(--font-mono);">DECISION BOUNDARY: 50% | SENSITIVITY: 93.1%</p>
+                        <p class="widget-caption" style="font-size: 0.72rem; color: #7D7078;">Decision boundary: 50% · Sensitivity: 93.1%</p>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -324,9 +325,9 @@ with tab1:
                     f"""
                     <div class="glass-card" style="height: 100%; display: flex; flex-direction: column; justify-content: center; margin: 0;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem;">
-                            <span style="background: rgba(0, 242, 254, 0.12); border: 1px solid rgba(0, 242, 254, 0.35); border-radius: 6px; padding: 3px 10px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: #00F2FE; letter-spacing: 0.06em;">// CLINICAL ACTION PROTOCOL</span>
+                            <span style="background: rgba(139, 26, 74, 0.10); border: 1px solid rgba(139, 26, 74, 0.25); border-radius: 2px; padding: 3px 10px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; color: #8B1A4A; letter-spacing: 0.05em; text-transform: uppercase;">Clinical guidance</span>
                         </div>
-                        <p style="color: #E2E8F0; font-size: 0.95rem; line-height: 1.65; margin: 0;">
+                        <p style="color: #1A1F2E; font-size: 0.98rem; line-height: 1.7; margin: 0; font-style: italic;">
                             {res['clinical_advice']}
                         </p>
                     </div>
@@ -346,10 +347,10 @@ with tab1:
                 for feat, weight in contribs.items():
                     bar_pct = min(int((abs(weight) / max_val) * 100), 100)
                     is_risk = weight > 0
-                    color = "#FF375F" if is_risk else "#30D158"
-                    badge_bg = "rgba(255, 55, 95, 0.15)" if is_risk else "rgba(48, 209, 88, 0.15)"
-                    badge_border = "rgba(255, 55, 95, 0.35)" if is_risk else "rgba(48, 209, 88, 0.35)"
-                    badge_label = "↑ Increases Risk" if is_risk else "↓ Protective Factor"
+                    color = "#C93528" if is_risk else "#2C7A4B"
+                    badge_bg = "rgba(201, 53, 40, 0.10)" if is_risk else "rgba(44, 122, 75, 0.10)"
+                    badge_border = "rgba(201, 53, 40, 0.28)" if is_risk else "rgba(44, 122, 75, 0.28)"
+                    badge_label = "↑ Increases risk" if is_risk else "↓ Protective"
                     rows_html.append(
                         f'<div class="trend-row">'
                         f'<span class="trend-name">{feat}</span>'
@@ -362,8 +363,8 @@ with tab1:
                 trend_content = "".join(rows_html)
                 st.markdown(
                     f'<div class="glass-card" style="padding: 1.6rem 1.8rem; margin-bottom: 1rem;">'
-                    f'<div class="section-header" style="margin-bottom: 0.35rem;"><span>📈</span> PHYSIOLOGICAL RISK FACTOR CONTRIBUTIONS</div>'
-                    f'<p style="color:#8E8E93; font-size:0.85rem; margin-top:0; margin-bottom:1rem;">'
+                    f'<div class="section-header" style="margin-bottom: 0.35rem;"><span>📈</span> Risk factor contributions</div>'
+                    f'<p style="color:#7D7078; font-size:0.88rem; font-style: italic; margin-top:0; margin-bottom:1rem;">'
                     f'Derived from the trained Logistic Regression model coefficients scaled by this patient\'s transformed biomarkers.'
                     f'</p>'
                     f'{trend_content}'
@@ -372,11 +373,12 @@ with tab1:
                 )
 
 
+
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║  TAB 2 — MODEL COMPARISON & COLLEGE DEMO                                  ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 with tab2:
-    st.markdown('<div class="section-header"><span>🏆</span> BENCHMARK PERFORMANCE & VALIDATION</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header"><span>🏆</span> Benchmark performance</div>', unsafe_allow_html=True)
     st.caption("Four machine learning classifiers tuned with Stratified 5-Fold Cross-Validation. Evaluated on unseen test set (N = 184).")
 
     metrics_csv = Path("reports/model_comparison_metrics.csv")
@@ -388,36 +390,36 @@ with tab2:
         st.markdown(
             f"""
             <div class="summary-grid">
-                <div class="summary-cell" style="border-color: rgba(255, 30, 68, 0.45); background: rgba(255, 30, 68, 0.12) !important;">
-                    <div class="cell-label" style="color: #FF1E44;">CHAMPION MODEL</div>
-                    <div class="cell-value" style="color: #FF1E44; font-size: 1.05rem;">{best_row['Model']}</div>
+                <div class="summary-cell" style="border-color: rgba(201, 53, 40, 0.40); background: rgba(201, 53, 40, 0.08) !important;">
+                    <div class="cell-label" style="color: #C93528;">Champion model</div>
+                    <div class="cell-value" style="color: #C93528; font-size: 1.05rem;">{best_row['Model']}</div>
                 </div>
                 <div class="summary-cell">
-                    <div class="cell-label">ACCURACY</div>
+                    <div class="cell-label">Accuracy</div>
                     <div class="cell-value">{best_row['Accuracy']:.1%}</div>
                 </div>
-                <div class="summary-cell" style="border-color: rgba(0, 230, 118, 0.35); background: rgba(0, 230, 118, 0.08) !important;">
-                    <div class="cell-label" style="color: #00E676;">RECALL (SENSITIVITY)</div>
-                    <div class="cell-value" style="color: #00E676;">{best_row['Recall']:.1%}</div>
+                <div class="summary-cell" style="border-color: rgba(44, 122, 75, 0.35); background: rgba(44, 122, 75, 0.08) !important;">
+                    <div class="cell-label" style="color: #2C7A4B;">Recall (sensitivity)</div>
+                    <div class="cell-value" style="color: #2C7A4B;">{best_row['Recall']:.1%}</div>
                 </div>
                 <div class="summary-cell">
-                    <div class="cell-label">F1-SCORE</div>
+                    <div class="cell-label">F1-Score</div>
                     <div class="cell-value">{best_row['F1-Score']:.3f}</div>
                 </div>
                 <div class="summary-cell">
                     <div class="cell-label">ROC-AUC</div>
                     <div class="cell-value">{best_row['ROC-AUC']:.3f}</div>
                 </div>
-                <div class="summary-cell" style="border-color: rgba(255, 179, 0, 0.35); background: rgba(255, 179, 0, 0.08) !important;">
-                    <div class="cell-label" style="color: #FFB300;">MISSED CASES</div>
-                    <div class="cell-value" style="color: #FFB300;">{int(best_row['False Negatives'])}</div>
+                <div class="summary-cell" style="border-color: rgba(155, 99, 0, 0.35); background: rgba(155, 99, 0, 0.08) !important;">
+                    <div class="cell-label" style="color: #9B6300;">Missed cases</div>
+                    <div class="cell-value" style="color: #9B6300;">{int(best_row['False Negatives'])}</div>
                 </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-        st.markdown("##### Detailed Metric Comparison Table")
+        st.markdown("##### Detailed metric comparison")
         disp_cols = ["Model", "Accuracy", "Precision", "Recall", "F1-Score", "ROC-AUC", "CV F1 (Mean)", "False Negatives"]
         st.dataframe(
             mdf[disp_cols].style.format({
@@ -426,10 +428,10 @@ with tab2:
                 "ROC-AUC": "{:.3f}", "CV F1 (Mean)": "{:.3f}",
             }).highlight_max(
                 subset=["Accuracy", "Precision", "Recall", "F1-Score", "ROC-AUC"],
-                color="rgba(48, 209, 88, 0.25)",
+                color="rgba(44, 122, 75, 0.18)",
             ).highlight_min(
                 subset=["False Negatives"],
-                color="rgba(48, 209, 88, 0.25)",
+                color="rgba(44, 122, 75, 0.18)",
             ),
             width="stretch",
             hide_index=True,
@@ -445,7 +447,7 @@ with tab2:
         st.info("Run `python src/train.py` to generate the benchmark comparison matrix.")
 
     st.markdown("---")
-    st.markdown('<div class="section-header"><span>📊</span> DIAGNOSTIC VISUALIZATIONS</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header"><span>📊</span> Diagnostic visualisations</div>', unsafe_allow_html=True)
 
     c1, c2 = st.columns(2, gap="medium")
     roc_img = Path("reports/model_roc_curves.png")
@@ -460,13 +462,13 @@ with tab2:
 
     with c2:
         if cm_img.exists():
-            st.image(str(cm_img), caption="Normalized Confusion Matrix (Winning Pipeline)", width="stretch")
+            st.image(str(cm_img), caption="Normalised Confusion Matrix (Winning Pipeline)", width="stretch")
         else:
             st.warning("Confusion matrix plot not found.")
 
     if fi_img.exists():
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown('<div class="section-header"><span>🌲</span> TOP CLINICAL PREDICTIVE MARKERS</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header"><span>🌲</span> Top clinical predictive markers</div>', unsafe_allow_html=True)
         st.image(str(fi_img), caption="Top Clinical Predictive Markers in the Pipeline", width="stretch")
 
 
@@ -474,22 +476,23 @@ with tab2:
 # ║  TAB 3 — DATASET & PROJECT TEAM                                            ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 with tab3:
-    st.markdown('<div class="section-header"><span>ℹ️</span> PROJECT SPECIFICATION & TEAM</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header"><span>ℹ️</span> Project specification & team</div>', unsafe_allow_html=True)
 
     info_left, info_right = st.columns(2, gap="large")
 
     with info_left:
+
         st.markdown(
             '<div class="glass-card">'
-            '<h4 style="margin-top:0; color:#FFFFFF;">🗂️ Dataset Architecture</h4>'
-            '<ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem;">'
+            '<h4 style="margin-top:0; color:#1A1F2E;">🗂️ Dataset Architecture</h4>'
+            '<ul style="color:#4A4048; line-height:1.8; font-size:0.95rem; padding-left:1.2rem;">'
             '<li><strong>Dataset Source:</strong> Kaggle Heart Failure Prediction Dataset by <em>fedesoriano</em></li>'
             '<li><strong>Total Cohort:</strong> 918 patients synthesized across 5 clinical registries (Cleveland, Hungarian, Switzerland, Long Beach VA, Statlog)</li>'
             '<li><strong>Features:</strong> 11 clinical indicators + 1 binary target (<code>HeartDisease</code>)</li>'
             '<li><strong>Class Distribution:</strong> 508 Positive (55.3%) vs. 410 Negative (44.7%) — balanced cohort</li>'
             '</ul>'
-            '<h4 style="margin-top:1.4rem; color:#FFFFFF;">🛠️ Data Quality Remediation</h4>'
-            '<ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem;">'
+            '<h4 style="margin-top:1.4rem; color:#1A1F2E;">🛠️ Data Quality Remediation</h4>'
+            '<ul style="color:#4A4048; line-height:1.8; font-size:0.95rem; padding-left:1.2rem;">'
             '<li><strong>Cholesterol Zeros (172 records):</strong> Biologically impossible serum values converted to <code>NaN</code>, imputed with training median inside the Pipeline, and flagged via <code>Cholesterol_missing</code>.</li>'
             '<li><strong>RestingBP Zero (1 record):</strong> Handled safely via training median imputation.</li>'
             '<li><strong>Leakage Prevention:</strong> Scalers and encoders fit exclusively on training folds via scikit-learn <code>ColumnTransformer</code>.</li>'
@@ -501,7 +504,7 @@ with tab3:
     with info_right:
         st.markdown(
             '<div class="glass-card">'
-            '<h4 style="margin-top:0; color:#FFFFFF;">👥 Project Team Members</h4>'
+            '<h4 style="margin-top:0; color:#1A1F2E;">👥 Project Team Members</h4>'
             '<div class="team-grid" style="margin-top: 1rem; margin-bottom: 1.4rem;">'
             '<div class="team-member">'
             '<div class="avatar">AJ</div>'
@@ -521,19 +524,19 @@ with tab3:
             '<div class="avatar">FH</div>'
             '<div class="team-info">'
             '<div class="name">Farhana H</div>'
-            '<div class="roll">Roll No. 30 · EDA & Reporting</div>'
+            '<div class="roll">Roll No. 30 · EDA &amp; Reporting</div>'
             '</div>'
             '</div>'
             '<div class="team-member">'
             '<div class="avatar">RK</div>'
             '<div class="team-info">'
             '<div class="name">Ridhin Krishna M</div>'
-            '<div class="roll">Roll No. 53 · UI/UX & API</div>'
+            '<div class="roll">Roll No. 53 · UI/UX &amp; API</div>'
             '</div>'
             '</div>'
             '</div>'
-            '<h4 style="margin-top:0; color:#FFFFFF;">⚠️ Clinical Limitations</h4>'
-            '<ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem; margin-bottom:0;">'
+            '<h4 style="margin-top:0; color:#1A1F2E;">⚠️ Clinical Limitations</h4>'
+            '<ul style="color:#4A4048; line-height:1.8; font-size:0.95rem; padding-left:1.2rem; margin-bottom:0;">'
             '<li><strong>Cohort Size:</strong> 918 observations is an academic exploratory sample.</li>'
             '<li><strong>Missing Modern Biomarkers:</strong> Lacks Body Mass Index (BMI), smoking pack-years, and hs-Troponin. <code>FastingBS</code> acts as a binary glucose surrogate.</li>'
             '<li><strong>Decision-Support Only:</strong> Designed strictly as an adjunctive triage aid.</li>'
@@ -541,3 +544,4 @@ with tab3:
             '</div>',
             unsafe_allow_html=True,
         )
+

@@ -1,315 +1,267 @@
-/* ── CardioSense Bio-Telemetry Design System ── */
-/* Modern Clinical Intelligence · Deep Obsidian & Arterial Luminescence */
+/* ── CardioSense — Anatomical Atlas Edition ── */
+/* Medical Journal Intelligence · Ivory Parchment & Venous Burgundy */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root {
-    /* Color Palette */
-    --bg-void: #05070B;
-    --bg-obsidian: #080C14;
-    --bg-slate: #0E1422;
-    --bg-surface: rgba(12, 18, 30, 0.72);
-    --bg-surface-elevated: rgba(18, 26, 42, 0.82);
-    --bg-input: #121826;
-    --bg-input-hover: #162032;
+    /* Parchment Base */
+    --bg-page:        #F7F3EE;
+    --bg-surface:     #F0EBE3;
+    --bg-card:        #FFFFFF;
+    --bg-card-tinted: rgba(255, 255, 255, 0.82);
+    --bg-input:       #FDFBF8;
+    --bg-inset:       #EDE7DD;
 
-    /* Accents & Luminescence */
-    --accent-crimson: #FF1E44;
-    --accent-crimson-glow: rgba(255, 30, 68, 0.38);
-    --accent-cyan: #00F2FE;
-    --accent-cyan-glow: rgba(0, 242, 254, 0.35);
-    --accent-emerald: #00E676;
-    --accent-emerald-glow: rgba(0, 230, 118, 0.32);
-    --accent-amber: #FFB300;
-    --accent-amber-glow: rgba(255, 179, 0, 0.32);
+    /* Ink & Text */
+    --ink-primary:    #1A1F2E;
+    --ink-secondary:  #4A4048;
+    --ink-muted:      #7D7078;
+    --ink-faint:      #B8AEB5;
 
-    /* Hairlines & Borders */
-    --border-hairline: rgba(0, 242, 254, 0.12);
-    --border-card: rgba(255, 255, 255, 0.09);
-    --border-input: rgba(0, 242, 254, 0.22);
-    --border-hover: rgba(0, 242, 254, 0.45);
+    /* Single Dominant Accent: Venous Burgundy */
+    --accent:         #8B1A4A;
+    --accent-deep:    #5E0F32;
+    --accent-light:   rgba(139, 26, 74, 0.10);
+    --accent-mid:     rgba(139, 26, 74, 0.22);
 
-    /* Typography Hierarchy */
-    --font-display: 'Sora', sans-serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    /* Vital Signals (used sparingly) */
+    --vital-red:      #C93528;
+    --vital-green:    #2C7A4B;
+    --vital-amber:    #9B6300;
 
-    /* Text Tones */
-    --text-pure: #FFFFFF;
-    --text-lead: #E2E8F0;
-    --text-muted: #8290A4;
-    --text-dim: #4B5565;
+    /* Hairlines */
+    --rule-primary:   rgba(26, 31, 46, 0.18);
+    --rule-light:     rgba(26, 31, 46, 0.09);
+
+    /* Typography */
+    --font-serif:     'Cormorant Garamond', 'Georgia', serif;
+    --font-mono:      'DM Mono', 'Menlo', monospace;
 }
 
-/* ── Typography & Global Engine ── */
+/* ── Global Reset & Typography ── */
 html, body, [class*="st-"] {
-    font-family: var(--font-body) !important;
+    font-family: var(--font-serif) !important;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    color: var(--ink-primary);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display) !important;
-    letter-spacing: -0.025em !important;
-    color: var(--text-pure) !important;
+    font-family: var(--font-serif) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+    color: var(--ink-primary) !important;
 }
 
-code, pre, .mono-data {
+p, li, span, div {
+    font-family: var(--font-serif) !important;
+}
+
+code, pre, .stDataFrame {
     font-family: var(--font-mono) !important;
 }
 
-/* ── App Shell & Layered Atmospheric Background ── */
+/* ── App Shell — Histological Parchment ── */
 .stApp {
-    background-color: var(--bg-void) !important;
+    background-color: var(--bg-page) !important;
     background-image:
-        radial-gradient(ellipse 65% 45% at 85% -10%, rgba(255, 30, 68, 0.11), transparent 70%),
-        radial-gradient(ellipse 55% 40% at 15% 100%, rgba(0, 242, 254, 0.08), transparent 60%),
-        linear-gradient(rgba(0, 242, 254, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 242, 254, 0.02) 1px, transparent 1px) !important;
-    background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px !important;
-    color: var(--text-lead) !important;
+        radial-gradient(ellipse 90% 50% at 50% 0%, rgba(139, 26, 74, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(200, 53, 40, 0.03) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100%, 100% 100%, 400px 400px !important;
+    color: var(--ink-primary) !important;
 }
 
 .block-container {
-    padding-top: 1.8rem !important;
-    padding-bottom: 3.5rem !important;
-    max-width: 1220px !important;
+    padding-top: 2.2rem !important;
+    padding-bottom: 4rem !important;
+    max-width: 1180px !important;
     position: relative !important;
     z-index: 1 !important;
 }
 
-/* ── High-Impact Orchestrated Entrance Motion ── */
-@keyframes telemetryScanReveal {
+/* ── Page-Load Entrance: Single Orchestrated Bloom ── */
+@keyframes atlasReveal {
     0% {
         opacity: 0;
-        transform: translateY(16px);
-        filter: blur(4px);
+        transform: scale(0.992);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
+        transform: scale(1);
     }
 }
 
-@keyframes cardiacLubDub {
-    0% { transform: scale(1); }
-    12% { transform: scale(1.16); filter: drop-shadow(0 0 14px var(--accent-crimson)); }
-    24% { transform: scale(1); filter: drop-shadow(0 0 4px var(--accent-crimson)); }
-    36% { transform: scale(1.10); filter: drop-shadow(0 0 10px var(--accent-crimson)); }
-    54% { transform: scale(1); }
+@keyframes heartPulse {
+    0%   { transform: scale(1); }
+    14%  { transform: scale(1.14); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.09); }
+    60%  { transform: scale(1); }
     100% { transform: scale(1); }
 }
 
-@keyframes livePulseBeacon {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
-}
-
-/* ── Hero Telemetry Deck ── */
+/* ── Hero Card — Atlas Cover Page ── */
 .hero-card {
-    background: linear-gradient(175deg, rgba(14, 20, 34, 0.88) 0%, rgba(8, 12, 20, 0.92) 100%) !important;
-    backdrop-filter: blur(28px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-    border: 1px solid var(--border-hairline) !important;
-    border-top: 1px solid rgba(0, 242, 254, 0.3) !important;
-    border-radius: 20px !important;
-    padding: 2.2rem 2.6rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    overflow: hidden;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-top: 3px solid var(--accent) !important;
+    border-radius: 4px !important;
+    padding: 2.6rem 3rem 2.2rem !important;
+    margin-bottom: 1.2rem !important;
+    position: relative !important;
+    overflow: hidden !important;
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
-        0 20px 48px rgba(0, 0, 0, 0.65),
-        0 0 35px rgba(0, 242, 254, 0.05) !important;
-    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+        0 2px 0 rgba(139, 26, 74, 0.12),
+        0 8px 32px rgba(26, 31, 46, 0.10) !important;
+    animation: atlasReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
-.hero-card::before {
+.hero-card::after {
     content: '';
     position: absolute;
-    top: 0; right: 0; width: 140px; height: 140px;
-    background: radial-gradient(circle at top right, rgba(255, 30, 68, 0.18) 0%, transparent 70%);
+    top: 0; right: 0;
+    width: 180px; height: 180px;
+    background: radial-gradient(ellipse at top right, rgba(139, 26, 74, 0.06) 0%, transparent 65%);
     pointer-events: none;
 }
 
-/* Telemetry Metadata Status Line */
-.telemetry-status-row {
+/* Classification row */
+.atlas-classification {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 1.1rem;
-    border-bottom: 1px solid rgba(0, 242, 254, 0.08);
-    padding-bottom: 0.8rem;
+    gap: 16px;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule-light);
 }
 
-.telemetry-beacon-chip {
+.classification-label {
+    font-family: var(--font-mono) !important;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.classification-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--rule-light);
+}
+
+.live-indicator {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--accent-emerald);
-    background: rgba(0, 230, 118, 0.1);
-    border: 1px solid rgba(0, 230, 118, 0.3);
-    border-radius: 999px;
-    padding: 4px 12px;
-}
-
-.beacon-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent-emerald);
-    animation: livePulseBeacon 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-}
-
-.telemetry-specs {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-muted);
+    gap: 7px;
+    font-family: var(--font-mono) !important;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--vital-green);
     letter-spacing: 0.04em;
 }
 
+.live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--vital-green);
+    box-shadow: 0 0 0 0 rgba(44, 122, 75, 0.5);
+    animation: livePulse 2.4s infinite;
+}
+
+@keyframes livePulse {
+    0%   { box-shadow: 0 0 0 0 rgba(44, 122, 75, 0.5); }
+    60%  { box-shadow: 0 0 0 6px rgba(44, 122, 75, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(44, 122, 75, 0); }
+}
+
 .hero-title {
-    font-family: var(--font-display) !important;
-    font-size: 2.75rem;
-    font-weight: 800;
-    letter-spacing: -0.035em;
-    color: var(--text-pure);
-    margin: 0 0 0.4rem 0;
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    font-family: var(--font-serif) !important;
+    font-size: 3.4rem !important;
+    font-weight: 300 !important;
+    letter-spacing: -0.03em !important;
+    color: var(--ink-primary) !important;
+    line-height: 1.0 !important;
+    margin: 0 0 0.5rem 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
 }
 
 .hero-title .heart-emoji {
-    font-size: 2.75rem;
+    font-size: 2.8rem;
     display: inline-block;
-    animation: cardiacLubDub 1.8s infinite ease-in-out;
+    animation: heartPulse 2.2s infinite ease-in-out;
+    filter: none;
 }
 
-.hero-title .title-text {
-    background: linear-gradient(180deg, #FFFFFF 30%, #CFD9E8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.hero-title .title-accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 400;
 }
 
 .hero-subtitle {
-    font-family: var(--font-body);
-    font-size: 1.02rem;
-    color: #94A3B8;
+    font-family: var(--font-serif) !important;
+    font-size: 1.08rem;
     font-weight: 400;
+    font-style: italic;
+    color: var(--ink-secondary);
+    line-height: 1.7;
+    max-width: 76ch;
     margin: 0;
-    line-height: 1.6;
-    max-width: 900px;
 }
 
-/* ── Clinical Notice ── */
+.hero-subtitle em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--ink-primary);
+}
+
+/* ── Clinical Notice — Ruled Margin Note ── */
 .clinical-notice {
-    background: rgba(255, 30, 68, 0.07) !important;
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    border: 1px solid rgba(255, 30, 68, 0.32) !important;
-    border-left: 4px solid var(--accent-crimson) !important;
-    border-radius: 14px !important;
-    padding: 0.95rem 1.4rem;
-    margin-bottom: 1.6rem;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 0.88rem;
-    color: #FFA5B2;
-    box-shadow: 0 8px 24px rgba(255, 30, 68, 0.08);
-    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+    background: rgba(201, 53, 40, 0.06) !important;
+    border: 1px solid rgba(201, 53, 40, 0.20) !important;
+    border-left: 3px solid var(--vital-red) !important;
+    border-radius: 3px !important;
+    padding: 0.9rem 1.3rem !important;
+    margin-bottom: 1.6rem !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    font-size: 0.94rem !important;
+    color: var(--ink-secondary) !important;
+    animation: atlasReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
 .clinical-notice strong {
-    color: #FF4765;
-    font-weight: 700;
-    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--vital-red);
 }
 
-/* ── Technical Section Header ── */
-.section-header {
-    font-family: var(--font-mono) !important;
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    color: var(--accent-cyan);
-    margin-bottom: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.section-header::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(0, 242, 254, 0.25) 0%, transparent 80%);
-    margin-left: 8px;
-}
-
-/* ── Bio-Telemetry Glass Cards ── */
-.glass-card {
-    background: var(--bg-surface) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    border: 1px solid var(--border-hairline) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        0 16px 40px rgba(0, 0, 0, 0.5) !important;
-    border-radius: 18px !important;
-    padding: 1.7rem 1.9rem;
-    margin-bottom: 1.4rem;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
-}
-
-.glass-card:hover {
-    border-color: rgba(0, 242, 254, 0.32) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        0 20px 48px rgba(0, 0, 0, 0.6),
-        0 0 24px rgba(0, 242, 254, 0.1) !important;
-    transform: translateY(-2px);
-}
-
-/* ── Telemetry Segmented Navigation Tabs ── */
+/* ── Navigation Tabs — Journal Tabs ── */
 div[data-testid="stTabs"] {
     background: transparent !important;
     margin-bottom: 1.8rem !important;
-    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+    animation: atlasReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
 }
 
 div[data-testid="stTabs"] [data-baseweb="tab-list"],
 .stTabs [data-baseweb="tab-list"],
 [data-baseweb="tab-list"] {
-    background: rgba(8, 12, 20, 0.85) !important;
-    backdrop-filter: blur(35px) !important;
-    -webkit-backdrop-filter: blur(35px) !important;
-    border: 1px solid var(--border-hairline) !important;
-    border-radius: 14px !important;
-    padding: 5px !important;
-    gap: 6px !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 4px !important;
+    padding: 4px !important;
+    gap: 2px !important;
     border-bottom: none !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 8px 24px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 2px 8px rgba(26, 31, 46, 0.07) !important;
     width: fit-content !important;
     max-width: 100% !important;
 }
 
-/* Strip Streamlit default red underlines */
+/* Strip Streamlit default underlines */
 div[data-testid="stTabs"] [data-baseweb="tab-highlight"],
 div[data-testid="stTabs"] [data-baseweb="tab-border"],
 div[data-baseweb="tab-highlight"],
@@ -322,128 +274,139 @@ div[data-baseweb="tab-border"],
     visibility: hidden !important;
 }
 
-/* Tab Capsule Buttons */
+/* Tab Buttons */
 div[data-testid="stTabs"] button[data-baseweb="tab"],
 .stTabs button[data-baseweb="tab"],
 button[data-baseweb="tab"] {
     background: transparent !important;
     border: 1px solid transparent !important;
-    border-radius: 10px !important;
-    padding: 0.6rem 1.4rem !important;
-    font-family: var(--font-mono) !important;
-    font-size: 0.86rem !important;
+    border-radius: 2px !important;
+    padding: 0.55rem 1.3rem !important;
+    font-family: var(--font-serif) !important;
+    font-size: 0.96rem !important;
     font-weight: 500 !important;
-    letter-spacing: 0.04em !important;
-    color: var(--text-muted) !important;
-    outline: none !important;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    font-style: italic !important;
+    letter-spacing: 0 !important;
+    color: var(--ink-muted) !important;
+    transition: color 0.2s ease, background 0.2s ease !important;
 }
 
 div[data-testid="stTabs"] button[data-baseweb="tab"]:hover,
 .stTabs button[data-baseweb="tab"]:hover,
 button[data-baseweb="tab"]:hover {
-    color: var(--text-pure) !important;
-    background: rgba(0, 242, 254, 0.08) !important;
+    color: var(--ink-primary) !important;
+    background: rgba(26, 31, 46, 0.05) !important;
 }
 
-/* Selected Tab: Active Telemetry Capsule with Cyan Border */
 div[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"],
 .stTabs button[data-baseweb="tab"][aria-selected="true"],
 button[data-baseweb="tab"][aria-selected="true"] {
-    background: rgba(0, 242, 254, 0.12) !important;
+    background: var(--accent) !important;
     color: #FFFFFF !important;
-    font-weight: 700 !important;
-    border: 1px solid rgba(0, 242, 254, 0.5) !important;
-    border-radius: 10px !important;
-    box-shadow:
-        0 4px 18px rgba(0, 0, 0, 0.4),
-        0 0 16px rgba(0, 242, 254, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+    border: 1px solid var(--accent-deep) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 8px rgba(139, 26, 74, 0.30) !important;
 }
 
-/* ── Clinical Form Container ── */
+/* ── Section Divider Rule ── */
+.section-header {
+    font-family: var(--font-serif) !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    font-style: italic !important;
+    letter-spacing: 0.02em !important;
+    color: var(--ink-muted) !important;
+    margin-bottom: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule-light);
+}
+
+/* ── Clinical Form — Atlas Data Entry ── */
 div[data-testid="stForm"] {
-    background: var(--bg-surface) !important;
-    backdrop-filter: blur(30px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
-    border: 1px solid var(--border-hairline) !important;
-    border-radius: 20px !important;
-    padding: 2.2rem !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        0 20px 50px rgba(0, 0, 0, 0.6) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 4px !important;
+    padding: 2rem 2.2rem !important;
+    box-shadow: 0 4px 20px rgba(26, 31, 46, 0.09) !important;
     margin-bottom: 1.6rem !important;
-    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+    animation: atlasReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.30s both;
 }
 
 div[data-testid="stForm"] div[data-testid="stColumn"] {
-    background: rgba(8, 12, 20, 0.6) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(0, 242, 254, 0.09) !important;
-    border-radius: 16px !important;
-    padding: 1.5rem 1.6rem !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--rule-light) !important;
+    border-radius: 3px !important;
+    padding: 1.4rem 1.6rem !important;
 }
 
-/* ── Form Inputs & Precision Telemetry Controls ── */
+/* ── Form Input Labels ── */
 div[data-testid="stWidgetLabel"] p,
 label[data-testid="stWidgetLabel"] {
-    color: #F1F5F9 !important;
-    font-family: var(--font-body) !important;
-    font-weight: 600 !important;
-    font-size: 0.88rem !important;
-    margin-bottom: 0.45rem !important;
-    letter-spacing: -0.01em !important;
+    color: var(--ink-primary) !important;
+    font-family: var(--font-serif) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.35rem !important;
 }
 
+/* ── Number Inputs ── */
 div[data-testid="stNumberInputContainer"],
 div[data-testid="stTextInput"] [data-baseweb="input"] > div {
     background-color: var(--bg-input) !important;
-    border: 1.5px solid var(--border-input) !important;
-    border-radius: 10px !important;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
-    min-height: 44px !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 1px 3px rgba(26, 31, 46, 0.08) !important;
+    min-height: 42px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 div[data-testid="stNumberInputContainer"]:hover {
-    background-color: var(--bg-input-hover) !important;
-    border-color: var(--border-hover) !important;
+    border-color: rgba(139, 26, 74, 0.40) !important;
 }
 
 div[data-testid="stNumberInputContainer"]:focus-within {
-    background-color: #151D2E !important;
-    border-color: var(--accent-cyan) !important;
-    box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.25), inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(139, 26, 74, 0.12), inset 0 1px 3px rgba(26, 31, 46, 0.08) !important;
 }
 
 div[data-testid="stNumberInputContainer"] input {
     font-family: var(--font-mono) !important;
-    color: #FFFFFF !important;
-    font-size: 1.02rem !important;
-    font-weight: 600 !important;
-    padding-left: 12px !important;
+    color: var(--ink-primary) !important;
+    font-size: 0.96rem !important;
+    font-weight: 500 !important;
+    padding-left: 10px !important;
     background: transparent !important;
     border: none !important;
 }
 
 button[data-testid="stNumberInputStepDown"],
 button[data-testid="stNumberInputStepUp"] {
-    background: rgba(0, 242, 254, 0.08) !important;
-    border: 1px solid rgba(0, 242, 254, 0.16) !important;
-    border-radius: 7px !important;
+    background: var(--bg-inset) !important;
+    border: 1px solid var(--rule-light) !important;
+    border-radius: 2px !important;
     margin: 4px 3px !important;
-    color: #E2E8F0 !important;
+    color: var(--ink-secondary) !important;
     transition: all 0.15s ease !important;
 }
+
 button[data-testid="stNumberInputStepDown"]:hover,
 button[data-testid="stNumberInputStepUp"]:hover {
-    background: rgba(0, 242, 254, 0.22) !important;
-    color: #FFFFFF !important;
-    border-color: var(--accent-cyan) !important;
+    background: var(--accent-light) !important;
+    color: var(--accent) !important;
+    border-color: var(--accent-mid) !important;
 }
 
-/* Dropdown Selectboxes */
+/* ── Selectbox Dropdowns ── */
 div[data-testid="stSelectbox"] .react-aria-Group,
 div[data-testid="stSelectbox"] div[role="group"],
 div[data-testid="stSelectbox"] div[class*="e1fp86qc0"],
@@ -453,15 +416,15 @@ div[data-testid="stSelectbox"] div[data-baseweb="select"],
 div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
 div[data-baseweb="select"] > div {
     background-color: var(--bg-input) !important;
-    border: 1.5px solid var(--border-input) !important;
-    border-radius: 10px !important;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
-    min-height: 44px !important;
-    height: 44px !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 1px 3px rgba(26, 31, 46, 0.08) !important;
+    min-height: 42px !important;
+    height: 42px !important;
     display: flex !important;
     align-items: center !important;
     padding: 0 6px !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 div[data-testid="stSelectbox"] .react-aria-Group:hover,
@@ -469,8 +432,7 @@ div[data-testid="stSelectbox"] div[role="group"]:hover,
 div[data-testid="stSelectbox"] div[class*="e1fp86qc0"]:hover,
 div[data-testid="stSelectbox"] [data-baseweb="select"] > div:hover,
 div[data-baseweb="select"] > div:hover {
-    background-color: var(--bg-input-hover) !important;
-    border-color: var(--border-hover) !important;
+    border-color: rgba(139, 26, 74, 0.40) !important;
 }
 
 div[data-testid="stSelectbox"] .react-aria-Group[data-focus-within],
@@ -479,35 +441,32 @@ div[data-testid="stSelectbox"] div[class*="e1fp86qc0"][data-focus-within],
 div[data-testid="stSelectbox"] div[class*="e1fp86qc0"]:focus-within,
 div[data-testid="stSelectbox"] [data-baseweb="select"]:focus-within > div,
 div[data-baseweb="select"]:focus-within > div {
-    background-color: #151D2E !important;
-    border-color: var(--accent-cyan) !important;
-    box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.25), inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(139, 26, 74, 0.12), inset 0 1px 3px rgba(26, 31, 46, 0.08) !important;
 }
 
 div[data-testid="stSelectbox"] .react-aria-Input,
 div[data-testid="stSelectbox"] input,
 div[data-testid="stSelectbox"] [class*="e1fp86qc1"] {
-    font-family: var(--font-body) !important;
+    font-family: var(--font-serif) !important;
     background: transparent !important;
-    color: #FFFFFF !important;
-    font-size: 0.96rem !important;
-    font-weight: 500 !important;
+    color: var(--ink-primary) !important;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
     border: none !important;
     padding-left: 8px !important;
 }
 
-/* Dropdown Virtual Popup List */
+/* Dropdown Virtual List */
 div[data-testid="stSelectboxVirtualDropdown"],
 div[class*="e1fp86qc4"],
 div[data-baseweb="popover"] > div,
 ul[data-baseweb="menu"] {
-    background-color: #0E1422 !important;
-    border: 1.5px solid rgba(0, 242, 254, 0.28) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.12) !important;
-    backdrop-filter: blur(28px) !important;
-    -webkit-backdrop-filter: blur(28px) !important;
-    padding: 6px !important;
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 8px 24px rgba(26, 31, 46, 0.15) !important;
+    padding: 4px !important;
 }
 
 div[data-testid="stSelectboxVirtualDropdown"] li,
@@ -515,13 +474,14 @@ div[data-testid="stSelectboxVirtualDropdown"] [role="option"],
 div[class*="e1fp86qc7"],
 li[data-baseweb="menu-item"] {
     background: transparent !important;
-    color: #E2E8F0 !important;
-    font-family: var(--font-body) !important;
-    font-size: 0.92rem !important;
-    border-radius: 7px !important;
-    margin: 2px 0 !important;
+    color: var(--ink-secondary) !important;
+    font-family: var(--font-serif) !important;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    border-radius: 2px !important;
+    margin: 1px 0 !important;
     padding: 8px 12px !important;
-    transition: background-color 0.15s ease !important;
+    transition: background-color 0.12s ease !important;
 }
 
 div[data-testid="stSelectboxVirtualDropdown"] li[data-hovered],
@@ -531,107 +491,122 @@ div[class*="e1fp86qc7"][data-hovered],
 div[class*="e1fp86qc7"][data-focused],
 li[data-baseweb="menu-item"]:hover,
 li[data-baseweb="menu-item"][aria-selected="true"] {
-    background-color: rgba(0, 242, 254, 0.20) !important;
-    color: #FFFFFF !important;
-    border-left: 3px solid var(--accent-cyan);
+    background-color: var(--accent-light) !important;
+    color: var(--accent-deep) !important;
+    font-weight: 500 !important;
 }
 
-/* Sliders */
+/* ── Sliders ── */
 div[data-testid="stSlider"] {
-    background: rgba(8, 12, 20, 0.65) !important;
-    border: 1px solid rgba(0, 242, 254, 0.10) !important;
-    border-radius: 12px !important;
-    padding: 0.75rem 1.1rem 0.5rem 1.1rem !important;
-    margin-bottom: 0.8rem !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--rule-light) !important;
+    border-radius: 3px !important;
+    padding: 0.7rem 1.1rem 0.45rem 1.1rem !important;
+    margin-bottom: 0.7rem !important;
 }
 
-/* Checkboxes */
+/* Slider track accent */
+div[data-testid="stSlider"] [data-baseweb="slider"] [role="progressbar"] {
+    background: var(--accent) !important;
+}
+
+div[data-testid="stSlider"] [data-baseweb="slider"] [role="slider"] {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+
+/* ── Checkboxes ── */
 div[data-testid="stCheckbox"] {
-    background: rgba(8, 12, 20, 0.65) !important;
-    border: 1px solid rgba(0, 242, 254, 0.10) !important;
-    border-radius: 10px !important;
-    padding: 0.75rem 1rem !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--rule-light) !important;
+    border-radius: 3px !important;
+    padding: 0.7rem 1rem !important;
 }
 
-/* ── Primary Action Button (High-Voltage Arterial Surge) ── */
+/* ── Submit Button — Primary Action ── */
 .stFormSubmitButton > button {
-    font-family: var(--font-display) !important;
-    background: linear-gradient(135deg, #FF1E44 0%, #C40026 100%) !important;
+    font-family: var(--font-serif) !important;
+    background: var(--accent) !important;
     color: #FFFFFF !important;
-    font-weight: 700 !important;
-    font-size: 1.05rem !important;
-    letter-spacing: 0.02em !important;
-    border-radius: 12px !important;
-    padding: 0.85rem 2.4rem !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.35),
-        0 10px 28px rgba(255, 30, 68, 0.45) !important;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+    font-size: 1.08rem !important;
+    letter-spacing: 0.01em !important;
+    border-radius: 3px !important;
+    padding: 0.75rem 2.6rem !important;
+    border: 1px solid var(--accent-deep) !important;
+    box-shadow: 0 4px 16px rgba(139, 26, 74, 0.30) !important;
+    transition: all 0.2s ease !important;
 }
 
 .stFormSubmitButton > button:hover {
-    transform: translateY(-2px) scale(1.01) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.45),
-        0 14px 36px rgba(255, 30, 68, 0.65),
-        0 0 20px rgba(255, 30, 68, 0.3) !important;
+    background: var(--accent-deep) !important;
+    box-shadow: 0 6px 22px rgba(139, 26, 74, 0.45) !important;
+    transform: translateY(-1px) !important;
 }
 
 .stFormSubmitButton > button:active {
-    transform: translateY(1px) scale(0.99) !important;
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(139, 26, 74, 0.30) !important;
 }
 
-/* ── Diagnostic Telemetry Result Widgets ── */
+/* ── Glass Card → Atlas Record Card ── */
+.glass-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 4px !important;
+    padding: 1.6rem 1.8rem !important;
+    margin-bottom: 1.2rem !important;
+    box-shadow: 0 2px 12px rgba(26, 31, 46, 0.08) !important;
+}
+
+/* ── Result: Health Widgets ── */
 .health-widget {
-    background: var(--bg-surface) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    border: 1px solid var(--border-hairline);
-    border-radius: 20px;
-    padding: 1.8rem 1.4rem;
-    text-align: center;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        0 18px 40px rgba(0, 0, 0, 0.55);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 4px !important;
+    padding: 1.8rem 1.4rem !important;
+    text-align: center !important;
+    box-shadow: 0 2px 12px rgba(26, 31, 46, 0.08) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100% !important;
 }
 
 .health-widget .widget-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
+    font-family: var(--font-mono) !important;
+    font-size: 0.67rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--ink-muted) !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .health-widget .widget-value {
-    font-family: var(--font-display);
-    font-size: 2.6rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 0.3rem;
+    font-family: var(--font-serif) !important;
+    font-size: 2.8rem !important;
+    font-weight: 300 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0.3rem !important;
 }
 
 .health-widget .widget-caption {
-    font-family: var(--font-body);
-    font-size: 0.86rem;
-    color: #CBD5E1;
-    margin: 0;
+    font-family: var(--font-serif) !important;
+    font-size: 0.88rem !important;
+    font-style: italic !important;
+    color: var(--ink-secondary) !important;
+    margin: 0 !important;
 }
 
-/* Probability Gauge Ring */
+/* Probability Ring */
 .ring-container {
     position: relative;
-    width: 152px;
-    height: 152px;
+    width: 148px;
+    height: 148px;
     margin: 0.5rem auto;
 }
 
@@ -650,66 +625,71 @@ div[data-testid="stCheckbox"] {
 }
 
 .ring-percent {
-    font-family: var(--font-mono);
-    font-size: 2.1rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
+    font-family: var(--font-mono) !important;
+    font-size: 2rem !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.03em !important;
+    line-height: 1 !important;
 }
 
 .ring-subtext {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-top: 3px;
+    font-family: var(--font-mono) !important;
+    font-size: 0.6rem !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.07em !important;
+    color: var(--ink-muted) !important;
+    margin-top: 3px !important;
 }
 
-/* ── Physiological Risk Factor Contributions ── */
-.trend-row {
-    background: rgba(14, 20, 32, 0.65) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(0, 242, 254, 0.08);
-    border-radius: 10px;
-    padding: 0.75rem 1.1rem;
-    margin-bottom: 0.55rem;
-    display: flex;
+/* Status chip */
+.telemetry-beacon-chip {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    gap: 7px;
+    font-family: var(--font-mono) !important;
+    font-size: 0.67rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    padding: 4px 10px;
 }
 
-.trend-row:hover {
-    background: rgba(20, 28, 46, 0.85) !important;
-    border-color: rgba(0, 242, 254, 0.25);
-    transform: translateX(3px);
+/* ── Risk Factor Contributions ── */
+.trend-row {
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--rule-light) !important;
+    border-radius: 3px !important;
+    padding: 0.7rem 1rem !important;
+    margin-bottom: 0.4rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
 }
 
 .trend-name {
-    font-family: var(--font-body);
-    font-size: 0.90rem;
-    font-weight: 600;
-    color: #F8FAFC;
-    flex: 1;
+    font-family: var(--font-serif) !important;
+    font-size: 0.92rem !important;
+    font-weight: 500 !important;
+    color: var(--ink-primary) !important;
+    flex: 1 !important;
 }
 
 .trend-badge {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 6px;
-    letter-spacing: 0.02em;
+    font-family: var(--font-mono) !important;
+    font-size: 0.68rem !important;
+    font-weight: 500 !important;
+    padding: 3px 9px !important;
+    border-radius: 2px !important;
+    letter-spacing: 0.01em !important;
 }
 
 .trend-bar-bg {
-    width: 140px;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.07);
+    width: 120px;
+    height: 4px;
+    background: var(--bg-inset);
     border-radius: 999px;
     overflow: hidden;
     position: relative;
@@ -718,90 +698,66 @@ div[data-testid="stCheckbox"] {
 .trend-bar-fill {
     height: 100%;
     border-radius: 999px;
-    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 0.6s ease;
 }
 
-/* ── Summary Metric Cells Row (Tab 2) ── */
+/* ── Summary Metric Cells (Tab 2) ── */
 .summary-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 1.4rem;
 }
 
 .summary-cell {
-    background: var(--bg-surface) !important;
-    backdrop-filter: blur(25px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-    border: 1px solid var(--border-hairline) !important;
-    border-radius: 14px !important;
-    padding: 0.95rem 0.6rem;
-    text-align: center;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.10),
-        0 8px 22px rgba(0, 0, 0, 0.4);
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.summary-cell:hover {
-    transform: translateY(-2px);
-    border-color: rgba(0, 242, 254, 0.35) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 3px !important;
+    padding: 0.9rem 0.6rem !important;
+    text-align: center !important;
+    box-shadow: 0 1px 6px rgba(26, 31, 46, 0.06) !important;
 }
 
 .summary-cell .cell-label {
-    font-family: var(--font-mono);
-    font-size: 0.67rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--text-muted);
-    margin-bottom: 4px;
+    font-family: var(--font-mono) !important;
+    font-size: 0.63rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: var(--ink-muted) !important;
+    margin-bottom: 4px !important;
 }
 
 .summary-cell .cell-value {
-    font-family: var(--font-mono);
-    font-size: 1.35rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: #FFFFFF;
+    font-family: var(--font-mono) !important;
+    font-size: 1.25rem !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--ink-primary) !important;
 }
 
-/* ── Benchmark DataFrame Container ── */
+/* ── Benchmark DataFrame ── */
 div[data-testid="stDataFrame"] {
-    background: var(--bg-surface) !important;
-    backdrop-filter: blur(28px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-    border: 1px solid var(--border-hairline) !important;
-    border-radius: 18px !important;
-    padding: 12px !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        0 16px 40px rgba(0, 0, 0, 0.55) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 4px !important;
+    padding: 8px !important;
+    box-shadow: 0 2px 12px rgba(26, 31, 46, 0.08) !important;
     margin-bottom: 1.4rem !important;
 }
 
-/* ── Diagnostic Visualizations (Tab 2 Images) ── */
+/* ── Diagnostic Images ── */
 div[data-testid="stImage"] {
-    background: var(--bg-surface) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    border: 1px solid var(--border-hairline) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        0 16px 40px rgba(0, 0, 0, 0.55) !important;
-    border-radius: 18px !important;
-    padding: 1.1rem !important;
-    margin-bottom: 1rem !important;
-    transition: border-color 0.25s ease, transform 0.25s ease;
-}
-
-div[data-testid="stImage"]:hover {
-    border-color: rgba(0, 242, 254, 0.35) !important;
-    transform: translateY(-2px);
+    background: var(--bg-card) !important;
+    border: 1px solid var(--rule-primary) !important;
+    border-radius: 4px !important;
+    padding: 1rem !important;
+    margin-bottom: 0.9rem !important;
+    box-shadow: 0 2px 12px rgba(26, 31, 46, 0.08) !important;
 }
 
 div[data-testid="stImage"] img {
-    border-radius: 10px !important;
+    border-radius: 2px !important;
     display: block !important;
 }
 
@@ -809,79 +765,70 @@ div[data-testid="stImageCaption"],
 div[data-testid="stImage"] [data-testid="stImageCaption"],
 div[data-testid="stImage"] p {
     font-family: var(--font-mono) !important;
-    color: var(--text-muted) !important;
-    font-size: 0.82rem !important;
+    color: var(--ink-muted) !important;
+    font-size: 0.76rem !important;
     text-align: center !important;
-    margin-top: 0.6rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.02em !important;
+    margin-top: 0.5rem !important;
+    font-style: italic !important;
 }
 
-/* ── Alerts & Callouts ── */
+/* ── Alerts ── */
 div[data-testid="stAlert"] {
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    border-radius: 14px !important;
+    border-radius: 3px !important;
     border-width: 1px !important;
-    font-family: var(--font-body) !important;
+    font-family: var(--font-serif) !important;
 }
 
-/* ── Team Grid (Tab 3) ── */
+/* ── Team Grid ── */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
 }
 
 .team-member {
-    background: rgba(14, 20, 34, 0.65) !important;
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    border: 1px solid rgba(0, 242, 254, 0.10) !important;
-    border-radius: 14px;
-    padding: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.team-member:hover {
-    transform: translateY(-2px);
-    border-color: rgba(0, 242, 254, 0.35) !important;
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--rule-light) !important;
+    border-radius: 3px !important;
+    padding: 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
 }
 
 .avatar {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--accent-crimson) 0%, #7928CA 100%);
+    width: 44px;
+    height: 44px;
+    border-radius: 3px;
+    background: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    font-weight: 800;
+    font-family: var(--font-mono) !important;
+    font-size: 0.82rem;
+    font-weight: 500;
     color: #FFFFFF;
-    box-shadow: 0 4px 14px rgba(255, 30, 68, 0.4);
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
 }
 
 .team-info .name {
-    font-family: var(--font-display);
+    font-family: var(--font-serif) !important;
     font-size: 0.98rem;
-    font-weight: 700;
-    color: #FFFFFF;
+    font-weight: 600;
+    color: var(--ink-primary);
     margin: 0;
 }
 
 .team-info .roll {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    margin-top: 2px;
+    font-family: var(--font-mono) !important;
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    margin-top: 3px;
+    font-style: italic;
 }
 
-/* Clean Hide */
+/* ── System Chrome Removal ── */
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
 div[data-testid="InputInstructions"],
@@ -890,13 +837,19 @@ div[data-testid="InputInstructions"],
     display: none !important;
 }
 
-/* ── Responsive Breakpoints ── */
+/* Streamlit header and toolbar */
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    border-bottom: 1px solid var(--rule-light) !important;
+}
+
+/* ── Responsive ── */
 @media (max-width: 900px) {
     .summary-grid {
         grid-template-columns: repeat(3, 1fr);
     }
     .hero-title {
-        font-size: 2.1rem;
+        font-size: 2.5rem !important;
     }
 }
 
@@ -908,6 +861,6 @@ div[data-testid="InputInstructions"],
         grid-template-columns: 1fr;
     }
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 2rem !important;
     }
 }
