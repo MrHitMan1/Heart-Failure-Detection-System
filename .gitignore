@@ -21,6 +21,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
-
+.agents/
 # Streamlit temporary files
 .streamlit/secrets.toml
