@@ -10,7 +10,7 @@ import streamlit as st
 
 # ── Page Configuration ──────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="CardioSense — Apple Health Edition",
+    page_title="CardioSense - SCT Edition",
     page_icon="🫀",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -925,7 +925,7 @@ st.markdown(
     """
     <div class="apple-hero">
         <div class="apple-pill-badge">
-            <span></span> CARDIOVASCULAR INTELLIGENCE · DECISION SUPPORT
+            <span></span> CARDIOVASCULAR INTELLIGENCE · DECISION SUPPORT
         </div>
         <div class="apple-title">
             <span class="heart-emoji">🫀</span>
