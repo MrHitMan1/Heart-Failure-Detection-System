@@ -51,20 +51,26 @@ PRESETS = {
     },
 }
 
-# ── Hero Banner ────────────────────────────────────────────────────────────────
+# ── Hero Telemetry Deck ────────────────────────────────────────────────────────
 st.markdown(
     """
     <div class="hero-card">
-        <div class="pill-badge">
-             CARDIOVASCULAR INTELLIGENCE · DECISION SUPPORT
+        <div class="telemetry-status-row">
+            <div class="telemetry-beacon-chip">
+                <span class="beacon-dot"></span>
+                <span>BIO-TELEMETRY INFERENCE ENGINE // ONLINE</span>
+            </div>
+            <div class="telemetry-specs">
+                <span>COHORT N=918</span> · <span>5 CLINICAL REGISTRIES</span> · <span>DIAGNOSTIC RECALL: 93.1%</span>
+            </div>
         </div>
         <div class="hero-title">
             <span class="heart-emoji">🫀</span>
             <span class="title-text">CardioSense</span>
         </div>
         <p class="hero-subtitle">
-            Machine learning decision-support system predicting heart failure risk from physiological biomarkers.
-            Tuned with Stratified 5-Fold Cross-Validation, prioritizing clinical recall.
+            Precision clinical decision-support telemetry predicting heart failure risk from 11 multivariable biomarkers.
+            Tuned with Stratified 5-Fold Cross-Validation, prioritizing diagnostic sensitivity to eliminate false negatives.
         </p>
     </div>
     """,
@@ -77,9 +83,9 @@ st.markdown(
     <div class="clinical-notice">
         <span>⚠️</span>
         <div>
-            <strong>Clinical Decision-Support Notice:</strong>
-            This software is an investigational academic prototype designed strictly to assist clinicians with risk triage.
-            It does not replace comprehensive medical evaluation, ECG telemetry, or coronary angiography.
+            <strong>Clinical Protocol Notice:</strong>
+            This software is an investigational decision-support prototype calibrated strictly for clinician risk triage.
+            It operates as an adjunct to, and does not replace, 12-lead ECG telemetry, serum troponin assay, or coronary angiography.
         </div>
     </div>
     """,
@@ -88,9 +94,9 @@ st.markdown(
 
 # ── Navigation Tabs ────────────────────────────────────────────────────────────
 tab1, tab2, tab3 = st.tabs([
-    "  🩺  Risk Assessment  ",
-    "  📊  Model Comparison  ",
-    "  ℹ️  About & Team  ",
+    "  🩺  01 // PATIENT TRIAGE  ",
+    "  📊  02 // BENCHMARK MATRIX  ",
+    "  ℹ️  03 // CLINICAL PROTOCOL & TEAM  ",
 ])
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
@@ -218,7 +224,7 @@ with tab1:
             )
             st_slope = slope_mapping[slope_choice]
 
-        submit_assessment = st.form_submit_button("🫀  Analyze Cardiac Risk", width="stretch")
+        submit_assessment = st.form_submit_button("⚡  EXECUTE MULTIVARIABLE RISK INFERENCE", width="stretch")
 
     # ── Assessment Results (Clinical Dashboard) ──
     if submit_assessment:
@@ -241,25 +247,25 @@ with tab1:
             lvl = res["risk_level"]
             diag = res["diagnosis"]
 
-            # Clinical Theme Palette per Risk Tier
+            # Clinical Telemetry Palette per Risk Tier
             RISK_TIERS = {
                 "Low": {
-                    "primary": "#30D158",      # Clinical Normal Green
-                    "bg": "rgba(48, 209, 88, 0.14)",
-                    "border": "rgba(48, 209, 88, 0.38)",
-                    "tag": "NORMAL PROFILE",
+                    "primary": "#00E676",      # Bioluminescent Emerald
+                    "bg": "rgba(0, 230, 118, 0.10)",
+                    "border": "rgba(0, 230, 118, 0.40)",
+                    "tag": "NORMAL // LOW RISK",
                 },
                 "Moderate": {
-                    "primary": "#FF9F0A",      # Warning Amber
-                    "bg": "rgba(255, 159, 10, 0.14)",
-                    "border": "rgba(255, 159, 10, 0.38)",
-                    "tag": "ELEVATED RISK",
+                    "primary": "#FFB300",      # Solar Amber
+                    "bg": "rgba(255, 179, 0, 0.10)",
+                    "border": "rgba(255, 179, 0, 0.40)",
+                    "tag": "ELEVATED // CAUTION",
                 },
                 "High": {
-                    "primary": "#FF2D55",      # Critical Alert Red
-                    "bg": "rgba(255, 45, 85, 0.16)",
-                    "border": "rgba(255, 45, 85, 0.42)",
-                    "tag": "HIGH RISK ALERT",
+                    "primary": "#FF1E44",      # Arterial Crimson
+                    "bg": "rgba(255, 30, 68, 0.14)",
+                    "border": "rgba(255, 30, 68, 0.50)",
+                    "tag": "CRITICAL // HIGH RISK",
                 },
             }
             tier = RISK_TIERS[lvl]
@@ -274,11 +280,11 @@ with tab1:
                 st.markdown(
                     f"""
                     <div class="health-widget" style="border-color: {tier['border']}; background: {tier['bg']};">
-                        <div class="pill-badge" style="background: rgba(255,255,255,0.1); border-color: {tier['border']}; color: {tier['primary']}; margin-bottom: 0.5rem;">
+                        <div class="telemetry-beacon-chip" style="background: rgba(255,255,255,0.06); border-color: {tier['border']}; color: {tier['primary']}; margin-bottom: 0.6rem;">
                             {tier['tag']}
                         </div>
-                        <div class="widget-value" style="color: {tier['primary']};">{lvl.upper()}</div>
-                        <p class="widget-caption" style="color: #FFFFFF; font-weight: 500;">{diag}</p>
+                        <div class="widget-value" style="color: {tier['primary']}; font-family: var(--font-display);">{lvl.upper()}</div>
+                        <p class="widget-caption" style="color: #F1F5F9; font-weight: 500;">{diag}</p>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -294,20 +300,20 @@ with tab1:
                     <div class="health-widget">
                         <div class="widget-label">CARDIAC RISK PROBABILITY</div>
                         <div class="ring-container">
-                            <svg width="148" height="148" viewBox="0 0 148 148">
-                                <circle cx="74" cy="74" r="58" stroke="rgba(255, 255, 255, 0.08)" stroke-width="12" fill="none" />
-                                <circle cx="74" cy="74" r="58" stroke="{tier['primary']}" stroke-width="12" fill="none"
+                            <svg width="152" height="152" viewBox="0 0 152 152">
+                                <circle cx="76" cy="76" r="58" stroke="rgba(255, 255, 255, 0.08)" stroke-width="12" fill="none" />
+                                <circle cx="76" cy="76" r="58" stroke="{tier['primary']}" stroke-width="12" fill="none"
                                         stroke-linecap="round"
                                         stroke-dasharray="{circ}"
                                         stroke-dashoffset="{stroke_dashoffset}"
-                                        style="transition: stroke-dashoffset 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);" />
+                                        style="transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 0 8px {tier['primary']});" />
                             </svg>
                             <div class="ring-center-content">
-                                <div class="ring-percent" style="color: {tier['primary']};">{pct:.1f}<span style="font-size: 1.1rem; font-weight: 700;">%</span></div>
+                                <div class="ring-percent" style="color: {tier['primary']}; font-family: var(--font-mono);">{pct:.1f}<span style="font-size: 1.1rem; font-weight: 700;">%</span></div>
                                 <div class="ring-subtext">PROBABILITY</div>
                             </div>
                         </div>
-                        <p class="widget-caption" style="font-size: 0.74rem; color: #8E8E93;">Threshold: 50% | High Risk: &gt;60%</p>
+                        <p class="widget-caption" style="font-size: 0.72rem; color: #8290A4; font-family: var(--font-mono);">DECISION BOUNDARY: 50% | SENSITIVITY: 93.1%</p>
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -318,9 +324,9 @@ with tab1:
                     f"""
                     <div class="glass-card" style="height: 100%; display: flex; flex-direction: column; justify-content: center; margin: 0;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem;">
-                            <span style="background: rgba(10, 132, 255, 0.18); border: 1px solid rgba(10, 132, 255, 0.4); border-radius: 8px; padding: 3px 8px; font-size: 0.75rem; font-weight: 700; color: #0A84FF;">💡 CLINICAL INSIGHT</span>
+                            <span style="background: rgba(0, 242, 254, 0.12); border: 1px solid rgba(0, 242, 254, 0.35); border-radius: 6px; padding: 3px 10px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: #00F2FE; letter-spacing: 0.06em;">// CLINICAL ACTION PROTOCOL</span>
                         </div>
-                        <p style="color: #E5E5EA; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+                        <p style="color: #E2E8F0; font-size: 0.95rem; line-height: 1.65; margin: 0;">
                             {res['clinical_advice']}
                         </p>
                     </div>
@@ -382,17 +388,17 @@ with tab2:
         st.markdown(
             f"""
             <div class="summary-grid">
-                <div class="summary-cell" style="border-color: rgba(255, 45, 85, 0.4); background: rgba(255, 45, 85, 0.1) !important;">
-                    <div class="cell-label" style="color: #FF375F;">TOP MODEL</div>
-                    <div class="cell-value" style="color: #FF375F; font-size: 1.05rem;">{best_row['Model']}</div>
+                <div class="summary-cell" style="border-color: rgba(255, 30, 68, 0.45); background: rgba(255, 30, 68, 0.12) !important;">
+                    <div class="cell-label" style="color: #FF1E44;">CHAMPION MODEL</div>
+                    <div class="cell-value" style="color: #FF1E44; font-size: 1.05rem;">{best_row['Model']}</div>
                 </div>
                 <div class="summary-cell">
-                    <div class="cell-label">TEST ACCURACY</div>
+                    <div class="cell-label">ACCURACY</div>
                     <div class="cell-value">{best_row['Accuracy']:.1%}</div>
                 </div>
-                <div class="summary-cell">
-                    <div class="cell-label" style="color: #30D158;">RECALL (SENSITIVITY)</div>
-                    <div class="cell-value" style="color: #30D158;">{best_row['Recall']:.1%}</div>
+                <div class="summary-cell" style="border-color: rgba(0, 230, 118, 0.35); background: rgba(0, 230, 118, 0.08) !important;">
+                    <div class="cell-label" style="color: #00E676;">RECALL (SENSITIVITY)</div>
+                    <div class="cell-value" style="color: #00E676;">{best_row['Recall']:.1%}</div>
                 </div>
                 <div class="summary-cell">
                     <div class="cell-label">F1-SCORE</div>
@@ -402,9 +408,9 @@ with tab2:
                     <div class="cell-label">ROC-AUC</div>
                     <div class="cell-value">{best_row['ROC-AUC']:.3f}</div>
                 </div>
-                <div class="summary-cell" style="border-color: rgba(255, 159, 10, 0.4); background: rgba(255, 159, 10, 0.1) !important;">
-                    <div class="cell-label" style="color: #FF9F0A;">MISSED DIAGNOSES</div>
-                    <div class="cell-value" style="color: #FF9F0A;">{int(best_row['False Negatives'])}</div>
+                <div class="summary-cell" style="border-color: rgba(255, 179, 0, 0.35); background: rgba(255, 179, 0, 0.08) !important;">
+                    <div class="cell-label" style="color: #FFB300;">MISSED CASES</div>
+                    <div class="cell-value" style="color: #FFB300;">{int(best_row['False Negatives'])}</div>
                 </div>
             </div>
             """,

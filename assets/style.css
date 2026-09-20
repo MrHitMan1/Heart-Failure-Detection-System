@@ -1,164 +1,315 @@
-/* ── Modern Cardiovascular Intelligence Design System ── */
+/* ── CardioSense Bio-Telemetry Design System ── */
+/* Modern Clinical Intelligence · Deep Obsidian & Arterial Luminescence */
 
-/* ── Typography Stack ── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=SF+Pro+Display:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap');
 
+:root {
+    /* Color Palette */
+    --bg-void: #05070B;
+    --bg-obsidian: #080C14;
+    --bg-slate: #0E1422;
+    --bg-surface: rgba(12, 18, 30, 0.72);
+    --bg-surface-elevated: rgba(18, 26, 42, 0.82);
+    --bg-input: #121826;
+    --bg-input-hover: #162032;
+
+    /* Accents & Luminescence */
+    --accent-crimson: #FF1E44;
+    --accent-crimson-glow: rgba(255, 30, 68, 0.38);
+    --accent-cyan: #00F2FE;
+    --accent-cyan-glow: rgba(0, 242, 254, 0.35);
+    --accent-emerald: #00E676;
+    --accent-emerald-glow: rgba(0, 230, 118, 0.32);
+    --accent-amber: #FFB300;
+    --accent-amber-glow: rgba(255, 179, 0, 0.32);
+
+    /* Hairlines & Borders */
+    --border-hairline: rgba(0, 242, 254, 0.12);
+    --border-card: rgba(255, 255, 255, 0.09);
+    --border-input: rgba(0, 242, 254, 0.22);
+    --border-hover: rgba(0, 242, 254, 0.45);
+
+    /* Typography Hierarchy */
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Text Tones */
+    --text-pure: #FFFFFF;
+    --text-lead: #E2E8F0;
+    --text-muted: #8290A4;
+    --text-dim: #4B5565;
+}
+
+/* ── Typography & Global Engine ── */
 html, body, [class*="st-"] {
-    font-family: system-ui, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: var(--font-body) !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── App Shell & Layout Constraints ── */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display) !important;
+    letter-spacing: -0.025em !important;
+    color: var(--text-pure) !important;
+}
+
+code, pre, .mono-data {
+    font-family: var(--font-mono) !important;
+}
+
+/* ── App Shell & Layered Atmospheric Background ── */
 .stApp {
-    background-color: #000000 !important;
-    color: #F5F5F7 !important;
+    background-color: var(--bg-void) !important;
+    background-image:
+        radial-gradient(ellipse 65% 45% at 85% -10%, rgba(255, 30, 68, 0.11), transparent 70%),
+        radial-gradient(ellipse 55% 40% at 15% 100%, rgba(0, 242, 254, 0.08), transparent 60%),
+        linear-gradient(rgba(0, 242, 254, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 254, 0.02) 1px, transparent 1px) !important;
+    background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px !important;
+    color: var(--text-lead) !important;
 }
 
 .block-container {
     padding-top: 1.8rem !important;
     padding-bottom: 3.5rem !important;
-    max-width: 1200px !important;
+    max-width: 1220px !important;
     position: relative !important;
     z-index: 1 !important;
 }
 
-/* ── Glassmorphic Acrylic Card ── */
-.glass-card {
-    background: rgba(20, 20, 26, 0.50) !important;
-    backdrop-filter: blur(30px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
-                0 16px 40px rgba(0, 0, 0, 0.45) !important;
-    border-radius: 22px !important;
-    padding: 1.8rem 2rem;
-    margin-bottom: 1.4rem;
-    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
-}
-.glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.22) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                0 20px 48px rgba(0, 0, 0, 0.55) !important;
+/* ── High-Impact Orchestrated Entrance Motion ── */
+@keyframes telemetryScanReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(16px);
+        filter: blur(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
 }
 
-/* ── Hero Header ── */
+@keyframes cardiacLubDub {
+    0% { transform: scale(1); }
+    12% { transform: scale(1.16); filter: drop-shadow(0 0 14px var(--accent-crimson)); }
+    24% { transform: scale(1); filter: drop-shadow(0 0 4px var(--accent-crimson)); }
+    36% { transform: scale(1.10); filter: drop-shadow(0 0 10px var(--accent-crimson)); }
+    54% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes livePulseBeacon {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+}
+
+/* ── Hero Telemetry Deck ── */
 .hero-card {
-    background: linear-gradient(180deg, rgba(28, 28, 36, 0.54) 0%, rgba(14, 14, 18, 0.60) 100%) !important;
-    backdrop-filter: blur(35px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                0 24px 50px rgba(0, 0, 0, 0.55) !important;
-    border-radius: 26px !important;
+    background: linear-gradient(175deg, rgba(14, 20, 34, 0.88) 0%, rgba(8, 12, 20, 0.92) 100%) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-top: 1px solid rgba(0, 242, 254, 0.3) !important;
+    border-radius: 20px !important;
     padding: 2.2rem 2.6rem;
     margin-bottom: 1.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 20px 48px rgba(0, 0, 0, 0.65),
+        0 0 35px rgba(0, 242, 254, 0.05) !important;
+    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
-.hero-card::after {
+
+.hero-card::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -20%;
-    width: 140%;
-    height: 200%;
-    background: radial-gradient(circle at 30% 20%, rgba(255, 45, 85, 0.14) 0%, transparent 60%);
+    top: 0; right: 0; width: 140px; height: 140px;
+    background: radial-gradient(circle at top right, rgba(255, 30, 68, 0.18) 0%, transparent 70%);
     pointer-events: none;
 }
-.pill-badge {
+
+/* Telemetry Metadata Status Line */
+.telemetry-status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.08);
+    padding-bottom: 0.8rem;
+}
+
+.telemetry-beacon-chip {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: rgba(255, 45, 85, 0.16);
-    border: 1px solid rgba(255, 45, 85, 0.4);
-    border-radius: 999px;
-    padding: 4px 13px;
+    gap: 8px;
+    font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #FF375F;
-    margin-bottom: 0.7rem;
+    color: var(--accent-emerald);
+    background: rgba(0, 230, 118, 0.1);
+    border: 1px solid rgba(0, 230, 118, 0.3);
+    border-radius: 999px;
+    padding: 4px 12px;
 }
+
+.beacon-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-emerald);
+    animation: livePulseBeacon 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.telemetry-specs {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+}
+
 .hero-title {
-    font-size: 2.6rem;
+    font-family: var(--font-display) !important;
+    font-size: 2.75rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
-    color: #FFFFFF;
+    letter-spacing: -0.035em;
+    color: var(--text-pure);
     margin: 0 0 0.4rem 0;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 }
+
 .hero-title .heart-emoji {
-    font-size: 2.6rem;
+    font-size: 2.75rem;
     display: inline-block;
-    filter: drop-shadow(0 4px 12px rgba(255, 45, 85, 0.4));
+    animation: cardiacLubDub 1.8s infinite ease-in-out;
 }
+
 .hero-title .title-text {
-    color: #FFFFFF;
-    background: linear-gradient(180deg, #FFFFFF 40%, #D1D1D6 100%);
+    background: linear-gradient(180deg, #FFFFFF 30%, #CFD9E8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
 .hero-subtitle {
-    font-size: 1rem;
-    color: #98989D;
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    color: #94A3B8;
     font-weight: 400;
     margin: 0;
-    letter-spacing: -0.01em;
-    line-height: 1.5;
+    line-height: 1.6;
+    max-width: 900px;
 }
 
 /* ── Clinical Notice ── */
 .clinical-notice {
-    background: rgba(255, 69, 58, 0.1) !important;
-    backdrop-filter: blur(35px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
-    border: 1px solid rgba(255, 69, 58, 0.28) !important;
-    border-radius: 16px !important;
+    background: rgba(255, 30, 68, 0.07) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border: 1px solid rgba(255, 30, 68, 0.32) !important;
+    border-left: 4px solid var(--accent-crimson) !important;
+    border-radius: 14px !important;
     padding: 0.95rem 1.4rem;
     margin-bottom: 1.6rem;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     font-size: 0.88rem;
-    color: #FF8A8A;
-    box-shadow: 0 8px 24px rgba(255, 69, 58, 0.1);
-}
-.clinical-notice strong {
-    color: #FF453A;
-    font-weight: 600;
+    color: #FFA5B2;
+    box-shadow: 0 8px 24px rgba(255, 30, 68, 0.08);
+    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
 
-/* ── Segmented Control (Tabs) ── */
+.clinical-notice strong {
+    color: #FF4765;
+    font-weight: 700;
+    font-family: var(--font-display);
+}
+
+/* ── Technical Section Header ── */
+.section-header {
+    font-family: var(--font-mono) !important;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--accent-cyan);
+    margin-bottom: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 242, 254, 0.25) 0%, transparent 80%);
+    margin-left: 8px;
+}
+
+/* ── Bio-Telemetry Glass Cards ── */
+.glass-card {
+    background: var(--bg-surface) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1px solid var(--border-hairline) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 16px 40px rgba(0, 0, 0, 0.5) !important;
+    border-radius: 18px !important;
+    padding: 1.7rem 1.9rem;
+    margin-bottom: 1.4rem;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(0, 242, 254, 0.32) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 20px 48px rgba(0, 0, 0, 0.6),
+        0 0 24px rgba(0, 242, 254, 0.1) !important;
+    transform: translateY(-2px);
+}
+
+/* ── Telemetry Segmented Navigation Tabs ── */
 div[data-testid="stTabs"] {
     background: transparent !important;
     margin-bottom: 1.8rem !important;
+    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
 }
 
 div[data-testid="stTabs"] [data-baseweb="tab-list"],
 .stTabs [data-baseweb="tab-list"],
 [data-baseweb="tab-list"] {
-    background: rgba(118, 118, 128, 0.24) !important;
-    backdrop-filter: blur(45px) saturate(200%) !important;
-    -webkit-backdrop-filter: blur(45px) saturate(200%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 16px !important;
+    background: rgba(8, 12, 20, 0.85) !important;
+    backdrop-filter: blur(35px) !important;
+    -webkit-backdrop-filter: blur(35px) !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: 14px !important;
     padding: 5px !important;
     gap: 6px !important;
     border-bottom: none !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                0 10px 28px rgba(0, 0, 0, 0.4) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 8px 24px rgba(0, 0, 0, 0.5) !important;
     width: fit-content !important;
     max-width: 100% !important;
 }
 
-/* Remove default underlines, borders, and red highlight lines from Streamlit */
+/* Strip Streamlit default red underlines */
 div[data-testid="stTabs"] [data-baseweb="tab-highlight"],
 div[data-testid="stTabs"] [data-baseweb="tab-border"],
 div[data-baseweb="tab-highlight"],
@@ -167,143 +318,109 @@ div[data-baseweb="tab-border"],
 [data-baseweb="tab-border"] {
     display: none !important;
     height: 0 !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
-    width: 0 !important;
     opacity: 0 !important;
     visibility: hidden !important;
-    border: none !important;
-    background: transparent !important;
-    position: absolute !important;
-    pointer-events: none !important;
 }
 
-/* Base Tab Buttons */
+/* Tab Capsule Buttons */
 div[data-testid="stTabs"] button[data-baseweb="tab"],
 .stTabs button[data-baseweb="tab"],
 button[data-baseweb="tab"] {
     background: transparent !important;
-    background-color: transparent !important;
     border: 1px solid transparent !important;
-    border-bottom: none !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-radius: 11px !important;
-    padding: 0.55rem 1.4rem !important;
-    font-size: 0.92rem !important;
+    border-radius: 10px !important;
+    padding: 0.6rem 1.4rem !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.86rem !important;
     font-weight: 500 !important;
-    color: #8E8E93 !important;
+    letter-spacing: 0.04em !important;
+    color: var(--text-muted) !important;
     outline: none !important;
-    box-shadow: none !important;
-    transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 div[data-testid="stTabs"] button[data-baseweb="tab"]:hover,
 .stTabs button[data-baseweb="tab"]:hover,
 button[data-baseweb="tab"]:hover {
-    color: #FFFFFF !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    border-bottom: none !important;
+    color: var(--text-pure) !important;
+    background: rgba(0, 242, 254, 0.08) !important;
 }
 
-/* Selected Tab: Floating Frosted Capsule */
+/* Selected Tab: Active Telemetry Capsule with Cyan Border */
 div[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"],
 .stTabs button[data-baseweb="tab"][aria-selected="true"],
 button[data-baseweb="tab"][aria-selected="true"] {
-    background: rgba(255, 255, 255, 0.18) !important;
-    background-color: rgba(255, 255, 255, 0.18) !important;
-    backdrop-filter: blur(25px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+    background: rgba(0, 242, 254, 0.12) !important;
     color: #FFFFFF !important;
-    font-weight: 600 !important;
-    border: 1px solid rgba(255, 255, 255, 0.22) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
-    border-radius: 11px !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(0, 242, 254, 0.5) !important;
+    border-radius: 10px !important;
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.4),
+        0 0 16px rgba(0, 242, 254, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Strip any child border elements */
-div[data-testid="stTabs"] button[data-baseweb="tab"] *,
-button[data-baseweb="tab"] * {
-    border-bottom: none !important;
-    border-bottom-color: transparent !important;
-    border-bottom-width: 0 !important;
-    text-decoration: none !important;
-}
-
-div[data-testid="stTabs"] button[data-baseweb="tab"]::after,
-button[data-baseweb="tab"]::after,
-div[data-testid="stTabs"] button[data-baseweb="tab"]::before,
-button[data-baseweb="tab"]::before {
-    display: none !important;
-    content: none !important;
-    border: none !important;
-}
-
-/* ── Form Container Frosted Glass ── */
+/* ── Clinical Form Container ── */
 div[data-testid="stForm"] {
-    background: rgba(18, 18, 24, 0.48) !important;
+    background: var(--bg-surface) !important;
     backdrop-filter: blur(30px) saturate(190%) !important;
     -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 24px !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: 20px !important;
     padding: 2.2rem !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18),
-                0 20px 50px rgba(0, 0, 0, 0.5) !important;
-    margin-bottom: 1.5rem !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 20px 50px rgba(0, 0, 0, 0.6) !important;
+    margin-bottom: 1.6rem !important;
+    animation: telemetryScanReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
 }
 
-/* Form Column Cards */
 div[data-testid="stForm"] div[data-testid="stColumn"] {
-    background: rgba(255, 255, 255, 0.035) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.07) !important;
-    border-radius: 18px !important;
-    padding: 1.4rem 1.6rem !important;
+    background: rgba(8, 12, 20, 0.6) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(0, 242, 254, 0.09) !important;
+    border-radius: 16px !important;
+    padding: 1.5rem 1.6rem !important;
 }
 
-/* ── Streamlit Form Input Styling ── */
-/* Labels */
+/* ── Form Inputs & Precision Telemetry Controls ── */
 div[data-testid="stWidgetLabel"] p,
 label[data-testid="stWidgetLabel"] {
-    color: #F5F5F7 !important;
+    color: #F1F5F9 !important;
+    font-family: var(--font-body) !important;
     font-weight: 600 !important;
     font-size: 0.88rem !important;
-    margin-bottom: 0.4rem !important;
+    margin-bottom: 0.45rem !important;
     letter-spacing: -0.01em !important;
 }
 
-/* ── Number Input & Text Input Boxes ── */
 div[data-testid="stNumberInputContainer"],
 div[data-testid="stTextInput"] [data-baseweb="input"] > div {
-    background-color: #22222a !important;
-    background: #22222a !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
-    border-radius: 12px !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    background-color: var(--bg-input) !important;
+    border: 1.5px solid var(--border-input) !important;
+    border-radius: 10px !important;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
     min-height: 44px !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
 }
 
 div[data-testid="stNumberInputContainer"]:hover {
-    background-color: #282832 !important;
-    background: #282832 !important;
-    border-color: rgba(255, 255, 255, 0.45) !important;
+    background-color: var(--bg-input-hover) !important;
+    border-color: var(--border-hover) !important;
 }
 
 div[data-testid="stNumberInputContainer"]:focus-within {
-    background-color: #262630 !important;
-    background: #262630 !important;
-    border-color: #FF2D55 !important;
-    box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.28), inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+    background-color: #151D2E !important;
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.25), inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
 }
 
 div[data-testid="stNumberInputContainer"] input {
+    font-family: var(--font-mono) !important;
     color: #FFFFFF !important;
-    font-size: 1rem !important;
+    font-size: 1.02rem !important;
     font-weight: 600 !important;
     padding-left: 12px !important;
     background: transparent !important;
@@ -312,22 +429,21 @@ div[data-testid="stNumberInputContainer"] input {
 
 button[data-testid="stNumberInputStepDown"],
 button[data-testid="stNumberInputStepUp"] {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 8px !important;
+    background: rgba(0, 242, 254, 0.08) !important;
+    border: 1px solid rgba(0, 242, 254, 0.16) !important;
+    border-radius: 7px !important;
     margin: 4px 3px !important;
-    height: 32px !important;
-    width: 32px !important;
-    color: #E5E5EA !important;
+    color: #E2E8F0 !important;
     transition: all 0.15s ease !important;
 }
 button[data-testid="stNumberInputStepDown"]:hover,
 button[data-testid="stNumberInputStepUp"]:hover {
-    background: rgba(255, 255, 255, 0.20) !important;
+    background: rgba(0, 242, 254, 0.22) !important;
     color: #FFFFFF !important;
+    border-color: var(--accent-cyan) !important;
 }
 
-/* ── Dropdown Selectboxes (Streamlit 1.64+ React-Aria & Fallbacks) ── */
+/* Dropdown Selectboxes */
 div[data-testid="stSelectbox"] .react-aria-Group,
 div[data-testid="stSelectbox"] div[role="group"],
 div[data-testid="stSelectbox"] div[class*="e1fp86qc0"],
@@ -336,94 +452,73 @@ div.stSelectbox div[role="group"],
 div[data-testid="stSelectbox"] div[data-baseweb="select"],
 div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
 div[data-baseweb="select"] > div {
-    background-color: #22222a !important;
-    background: #22222a !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
-    border-radius: 12px !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    background-color: var(--bg-input) !important;
+    border: 1.5px solid var(--border-input) !important;
+    border-radius: 10px !important;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
     min-height: 44px !important;
     height: 44px !important;
     display: flex !important;
     align-items: center !important;
     padding: 0 6px !important;
-    box-sizing: border-box !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
 }
 
-/* Hover State for Selectboxes */
 div[data-testid="stSelectbox"] .react-aria-Group:hover,
 div[data-testid="stSelectbox"] div[role="group"]:hover,
 div[data-testid="stSelectbox"] div[class*="e1fp86qc0"]:hover,
 div[data-testid="stSelectbox"] [data-baseweb="select"] > div:hover,
 div[data-baseweb="select"] > div:hover {
-    background-color: #282832 !important;
-    background: #282832 !important;
-    border-color: rgba(255, 255, 255, 0.45) !important;
+    background-color: var(--bg-input-hover) !important;
+    border-color: var(--border-hover) !important;
 }
 
-/* Focus State: Halo Glow (React-Aria & BaseWeb) */
 div[data-testid="stSelectbox"] .react-aria-Group[data-focus-within],
 div[data-testid="stSelectbox"] .react-aria-Group:focus-within,
 div[data-testid="stSelectbox"] div[class*="e1fp86qc0"][data-focus-within],
 div[data-testid="stSelectbox"] div[class*="e1fp86qc0"]:focus-within,
 div[data-testid="stSelectbox"] [data-baseweb="select"]:focus-within > div,
 div[data-baseweb="select"]:focus-within > div {
-    background-color: #262630 !important;
-    background: #262630 !important;
-    border-color: #FF2D55 !important;
-    box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.28), inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+    background-color: #151D2E !important;
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.25), inset 0 2px 5px rgba(0, 0, 0, 0.45) !important;
 }
 
-/* Selectbox input text formatting */
 div[data-testid="stSelectbox"] .react-aria-Input,
 div[data-testid="stSelectbox"] input,
 div[data-testid="stSelectbox"] [class*="e1fp86qc1"] {
+    font-family: var(--font-body) !important;
     background: transparent !important;
-    background-color: transparent !important;
     color: #FFFFFF !important;
-    font-size: 0.98rem !important;
+    font-size: 0.96rem !important;
     font-weight: 500 !important;
     border: none !important;
-    box-shadow: none !important;
     padding-left: 8px !important;
 }
 
-/* Selectbox dropdown chevron button */
-div[data-testid="stSelectbox"] button,
-div[data-testid="stSelectbox"] [class*="e1fp86qc2"] {
-    background: transparent !important;
-    border: none !important;
-    color: #D1D1D6 !important;
-}
-div[data-testid="stSelectbox"] svg {
-    fill: #D1D1D6 !important;
-    color: #D1D1D6 !important;
-}
-
-/* Dropdown Virtual Popup List (stSelectboxVirtualDropdown & BaseWeb Popovers) */
+/* Dropdown Virtual Popup List */
 div[data-testid="stSelectboxVirtualDropdown"],
 div[class*="e1fp86qc4"],
 div[data-baseweb="popover"] > div,
 ul[data-baseweb="menu"] {
-    background-color: #22222a !important;
-    background: #22222a !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
-    border-radius: 14px !important;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75) !important;
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
+    background-color: #0E1422 !important;
+    border: 1.5px solid rgba(0, 242, 254, 0.28) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 254, 0.12) !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
     padding: 6px !important;
 }
 
-/* Dropdown list items */
 div[data-testid="stSelectboxVirtualDropdown"] li,
 div[data-testid="stSelectboxVirtualDropdown"] [role="option"],
 div[class*="e1fp86qc7"],
 li[data-baseweb="menu-item"] {
     background: transparent !important;
-    color: #FFFFFF !important;
-    font-size: 0.94rem !important;
-    border-radius: 8px !important;
+    color: #E2E8F0 !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.92rem !important;
+    border-radius: 7px !important;
     margin: 2px 0 !important;
     padding: 8px 12px !important;
     transition: background-color 0.15s ease !important;
@@ -436,105 +531,114 @@ div[class*="e1fp86qc7"][data-hovered],
 div[class*="e1fp86qc7"][data-focused],
 li[data-baseweb="menu-item"]:hover,
 li[data-baseweb="menu-item"][aria-selected="true"] {
-    background-color: rgba(255, 45, 85, 0.3) !important;
-    background: rgba(255, 45, 85, 0.3) !important;
+    background-color: rgba(0, 242, 254, 0.20) !important;
     color: #FFFFFF !important;
+    border-left: 3px solid var(--accent-cyan);
 }
 
-/* Hide 'Press Enter to submit form' helper prompt */
-div[data-testid="InputInstructions"],
-[data-testid="InputInstructions"],
-[data-testid="stInputInstructions"],
-small[data-testid="InputInstructions"] {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    width: 0 !important;
-    font-size: 0 !important;
-    line-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Slider Container Distinction */
+/* Sliders */
 div[data-testid="stSlider"] {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.09) !important;
-    border-radius: 14px !important;
-    padding: 0.65rem 1rem 0.4rem 1rem !important;
+    background: rgba(8, 12, 20, 0.65) !important;
+    border: 1px solid rgba(0, 242, 254, 0.10) !important;
+    border-radius: 12px !important;
+    padding: 0.75rem 1.1rem 0.5rem 1.1rem !important;
     margin-bottom: 0.8rem !important;
 }
 
-/* Checkbox Container Distinction */
+/* Checkboxes */
 div[data-testid="stCheckbox"] {
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.09) !important;
-    border-radius: 12px !important;
+    background: rgba(8, 12, 20, 0.65) !important;
+    border: 1px solid rgba(0, 242, 254, 0.10) !important;
+    border-radius: 10px !important;
     padding: 0.75rem 1rem !important;
 }
 
-/* ── Section Title ── */
-.section-header {
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: #8E8E93;
-    margin-bottom: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* ── Primary Action Button (High-Voltage Arterial Surge) ── */
+.stFormSubmitButton > button {
+    font-family: var(--font-display) !important;
+    background: linear-gradient(135deg, #FF1E44 0%, #C40026 100%) !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    letter-spacing: 0.02em !important;
+    border-radius: 12px !important;
+    padding: 0.85rem 2.4rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 10px 28px rgba(255, 30, 68, 0.45) !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* ── Diagnostic Widget Cards ── */
+.stFormSubmitButton > button:hover {
+    transform: translateY(-2px) scale(1.01) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        0 14px 36px rgba(255, 30, 68, 0.65),
+        0 0 20px rgba(255, 30, 68, 0.3) !important;
+}
+
+.stFormSubmitButton > button:active {
+    transform: translateY(1px) scale(0.99) !important;
+}
+
+/* ── Diagnostic Telemetry Result Widgets ── */
 .health-widget {
-    background: rgba(18, 18, 24, 0.52) !important;
-    backdrop-filter: blur(30px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 22px;
-    padding: 1.6rem 1.4rem;
+    background: var(--bg-surface) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1px solid var(--border-hairline);
+    border-radius: 20px;
+    padding: 1.8rem 1.4rem;
     text-align: center;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
-                0 16px 36px rgba(0, 0, 0, 0.45);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 18px 40px rgba(0, 0, 0, 0.55);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
+
 .health-widget .widget-label {
-    font-size: 0.74rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: #8E8E93;
-    margin-bottom: 0.4rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
 }
+
 .health-widget .widget-value {
-    font-size: 2.5rem;
+    font-family: var(--font-display);
+    font-size: 2.6rem;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.1;
     margin-bottom: 0.3rem;
 }
+
 .health-widget .widget-caption {
-    font-size: 0.85rem;
-    color: #AEAEB2;
+    font-family: var(--font-body);
+    font-size: 0.86rem;
+    color: #CBD5E1;
     margin: 0;
 }
 
-/* ── Circular Probability Gauge ── */
+/* Probability Gauge Ring */
 .ring-container {
     position: relative;
-    width: 148px;
-    height: 148px;
-    margin: 0.4rem auto;
+    width: 152px;
+    height: 152px;
+    margin: 0.5rem auto;
 }
+
 .ring-container svg {
     transform: rotate(-90deg);
 }
+
 .ring-center-content {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -544,216 +648,266 @@ div[data-testid="stCheckbox"] {
     justify-content: center;
     pointer-events: none;
 }
+
 .ring-percent {
-    font-size: 1.95rem;
+    font-family: var(--font-mono);
+    font-size: 2.1rem;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
 }
+
 .ring-subtext {
-    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #8E8E93;
-    margin-top: 2px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 3px;
 }
 
-/* ── Metric Trends (Factor Contributions) ── */
+/* ── Physiological Risk Factor Contributions ── */
 .trend-row {
-    background: rgba(26, 26, 34, 0.50) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
+    background: rgba(14, 20, 32, 0.65) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(0, 242, 254, 0.08);
+    border-radius: 10px;
     padding: 0.75rem 1.1rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.55rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
+
 .trend-row:hover {
-    background: rgba(36, 36, 44, 0.65) !important;
-    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(20, 28, 46, 0.85) !important;
+    border-color: rgba(0, 242, 254, 0.25);
+    transform: translateX(3px);
 }
+
 .trend-name {
-    font-size: 0.88rem;
+    font-family: var(--font-body);
+    font-size: 0.90rem;
     font-weight: 600;
-    color: #F5F5F7;
+    color: #F8FAFC;
     flex: 1;
 }
+
 .trend-badge {
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
     font-weight: 700;
     padding: 3px 10px;
-    border-radius: 999px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
 }
+
 .trend-bar-bg {
     width: 140px;
     height: 6px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.07);
     border-radius: 999px;
     overflow: hidden;
     position: relative;
 }
+
 .trend-bar-fill {
     height: 100%;
     border-radius: 999px;
-    transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Primary Action Button (Form Submit) ── */
-.stFormSubmitButton > button {
-    background: linear-gradient(180deg, #FF375F 0%, #E00034 100%) !important;
-    color: #FFFFFF !important;
-    font-weight: 700 !important;
-    font-size: 1.05rem !important;
-    border-radius: 14px !important;
-    padding: 0.8rem 2.2rem !important;
-    border: none !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                0 8px 24px rgba(255, 45, 85, 0.38) !important;
-    letter-spacing: -0.01em !important;
-    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-}
-.stFormSubmitButton > button:hover {
-    transform: scale(1.015) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
-                0 12px 30px rgba(255, 45, 85, 0.5) !important;
-}
-.stFormSubmitButton > button:active {
-    transform: scale(0.985) !important;
-}
-
-/* ── Summary Metric Pills Row (Tab 2) ── */
+/* ── Summary Metric Cells Row (Tab 2) ── */
 .summary-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     margin-bottom: 1.4rem;
 }
+
 .summary-cell {
-    background: rgba(20, 20, 26, 0.50) !important;
+    background: var(--bg-surface) !important;
     backdrop-filter: blur(25px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 16px !important;
-    padding: 0.9rem 0.6rem;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: 14px !important;
+    padding: 0.95rem 0.6rem;
     text-align: center;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
-                0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 8px 22px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
+
+.summary-cell:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 242, 254, 0.35) !important;
+}
+
 .summary-cell .cell-label {
-    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #8E8E93;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
     margin-bottom: 4px;
 }
+
 .summary-cell .cell-value {
-    font-size: 1.3rem;
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #F5F5F7;
+    color: #FFFFFF;
 }
 
-/* ── DataFrame Container ── */
+/* ── Benchmark DataFrame Container ── */
 div[data-testid="stDataFrame"] {
-    background: rgba(18, 18, 24, 0.50) !important;
+    background: var(--bg-surface) !important;
     backdrop-filter: blur(28px) saturate(190%) !important;
     -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 20px !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: 18px !important;
     padding: 12px !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
-                0 16px 40px rgba(0, 0, 0, 0.45) !important;
-    margin-bottom: 1.2rem !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 16px 40px rgba(0, 0, 0, 0.55) !important;
+    margin-bottom: 1.4rem !important;
 }
 
-/* ── Glass Card for Images (Tab 2) ── */
+/* ── Diagnostic Visualizations (Tab 2 Images) ── */
 div[data-testid="stImage"] {
-    background: rgba(20, 20, 26, 0.50) !important;
+    background: var(--bg-surface) !important;
     backdrop-filter: blur(28px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
-                0 16px 40px rgba(0, 0, 0, 0.45) !important;
-    border-radius: 20px !important;
-    padding: 1rem !important;
+    border: 1px solid var(--border-hairline) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 16px 40px rgba(0, 0, 0, 0.55) !important;
+    border-radius: 18px !important;
+    padding: 1.1rem !important;
     margin-bottom: 1rem !important;
+    transition: border-color 0.25s ease, transform 0.25s ease;
 }
+
+div[data-testid="stImage"]:hover {
+    border-color: rgba(0, 242, 254, 0.35) !important;
+    transform: translateY(-2px);
+}
+
 div[data-testid="stImage"] img {
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     display: block !important;
 }
+
 div[data-testid="stImageCaption"],
 div[data-testid="stImage"] [data-testid="stImageCaption"],
 div[data-testid="stImage"] p {
-    color: #AEAEB2 !important;
-    font-size: 0.86rem !important;
+    font-family: var(--font-mono) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.82rem !important;
     text-align: center !important;
     margin-top: 0.6rem !important;
     font-weight: 500 !important;
+    letter-spacing: 0.02em !important;
 }
 
-/* ── Alert Callouts (st.success, st.warning, st.info) ── */
+/* ── Alerts & Callouts ── */
 div[data-testid="stAlert"] {
-    backdrop-filter: blur(25px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(25px) saturate(190%) !important;
-    border-radius: 16px !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border-radius: 14px !important;
     border-width: 1px !important;
+    font-family: var(--font-body) !important;
 }
 
-/* ── Team Grid ── */
+/* ── Team Grid (Tab 3) ── */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
+
 .team-member {
-    background: rgba(24, 24, 32, 0.52) !important;
+    background: rgba(14, 20, 34, 0.65) !important;
     backdrop-filter: blur(25px) !important;
     -webkit-backdrop-filter: blur(25px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 16px;
+    border: 1px solid rgba(0, 242, 254, 0.10) !important;
+    border-radius: 14px;
     padding: 1.2rem;
     display: flex;
     align-items: center;
     gap: 14px;
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
+
 .team-member:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(0, 242, 254, 0.35) !important;
 }
+
 .avatar {
     width: 46px;
     height: 46px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #FF2D55 0%, #5E5CE6 100%);
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent-crimson) 0%, #7928CA 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: var(--font-mono);
     font-size: 1rem;
     font-weight: 800;
     color: #FFFFFF;
-    box-shadow: 0 4px 14px rgba(255, 45, 85, 0.35);
+    box-shadow: 0 4px 14px rgba(255, 30, 68, 0.4);
 }
+
 .team-info .name {
+    font-family: var(--font-display);
     font-size: 0.98rem;
     font-weight: 700;
-    color: #F5F5F7;
+    color: #FFFFFF;
     margin: 0;
 }
+
 .team-info .roll {
+    font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: #8E8E93;
+    color: var(--text-muted);
     margin-top: 2px;
 }
 
-/* Hide default branding */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
+/* Clean Hide */
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+div[data-testid="InputInstructions"],
+[data-testid="InputInstructions"],
+[data-testid="stInputInstructions"] {
+    display: none !important;
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 900px) {
+    .summary-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .hero-title {
+        font-size: 2.1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-title {
+        font-size: 1.8rem;
+    }
+}
