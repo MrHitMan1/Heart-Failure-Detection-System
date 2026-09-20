@@ -690,6 +690,33 @@ st.markdown(
         margin-bottom: 1.2rem !important;
     }
 
+    /* ── Apple Glass Card for Images (Tab 2) ── */
+    div[data-testid="stImage"] {
+        background: rgba(20, 20, 26, 0.50) !important;
+        backdrop-filter: blur(28px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
+                    0 16px 40px rgba(0, 0, 0, 0.45) !important;
+        border-radius: 20px !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    div[data-testid="stImage"] img {
+        border-radius: 12px !important;
+        display: block !important;
+    }
+    div[data-testid="stImageCaption"],
+    div[data-testid="stImage"] [data-testid="stImageCaption"],
+    div[data-testid="stImage"] p {
+        color: #AEAEB2 !important;
+        font-size: 0.86rem !important;
+        text-align: center !important;
+        margin-top: 0.6rem !important;
+        font-weight: 500 !important;
+    }
+
+
     /* ── Apple Alert Callouts (st.success, st.warning, st.info) ── */
     div[data-testid="stAlert"] {
         backdrop-filter: blur(25px) saturate(190%) !important;
@@ -941,14 +968,11 @@ tab1, tab2, tab3 = st.tabs([
 with tab1:
     st.markdown('<div class="apple-section-header"><span>📋</span> CLINICAL PROFILE INPUT</div>', unsafe_allow_html=True)
 
-    # Archetype Selector wrapped in Frosted Glass Panel
+    # Archetype Selector (Apple HIG Section Style)
     st.markdown(
-        """
-        <div class="apple-card" style="padding: 1.1rem 1.6rem; margin-bottom: 1.4rem;">
-            <div class="apple-section-header" style="margin-bottom: 0.35rem;">
-                <span>⚡</span> QUICK PRESET ARCHETYPES (DEMO & VIVA PRESENTATION)
-            </div>
-        """,
+        '<div class="apple-section-header" style="margin-bottom: 0.5rem;">'
+        '<span>⚡</span> QUICK PRESET ARCHETYPES (DEMO & VIVA PRESENTATION)'
+        '</div>',
         unsafe_allow_html=True,
     )
     preset_choice = st.selectbox(
@@ -957,7 +981,6 @@ with tab1:
         index=0,
         label_visibility="collapsed",
     )
-    st.markdown("</div>", unsafe_allow_html=True)
 
     preset_data = PRESETS[preset_choice]
     def _val(key, default):
@@ -1181,21 +1204,8 @@ with tab1:
             contribs = res.get("contributions", {})
             if contribs:
                 st.markdown("<br>", unsafe_allow_html=True)
-                st.markdown(
-                    """
-                    <div class="apple-card" style="padding: 1.6rem 1.8rem; margin-bottom: 1rem;">
-                        <div class="apple-section-header" style="margin-bottom: 0.35rem;">
-                            <span>📈</span> PHYSIOLOGICAL RISK FACTOR CONTRIBUTIONS
-                        </div>
-                        <p style="color:#8E8E93; font-size:0.85rem; margin-top:0; margin-bottom:1rem;">
-                            Derived from the trained Logistic Regression model coefficients scaled by this patient's transformed biomarkers.
-                        </p>
-                    """,
-                    unsafe_allow_html=True,
-                )
-
                 max_val = max(abs(v) for v in contribs.values()) or 1.0
-
+                rows_html = []
                 for feat, weight in contribs.items():
                     bar_pct = min(int((abs(weight) / max_val) * 100), 100)
                     is_risk = weight > 0
@@ -1203,22 +1213,26 @@ with tab1:
                     badge_bg = "rgba(255, 55, 95, 0.15)" if is_risk else "rgba(48, 209, 88, 0.15)"
                     badge_border = "rgba(255, 55, 95, 0.35)" if is_risk else "rgba(48, 209, 88, 0.35)"
                     badge_label = "↑ Increases Risk" if is_risk else "↓ Protective Factor"
-
-                    st.markdown(
-                        f"""
-                        <div class="trend-row">
-                            <span class="trend-name">{feat}</span>
-                            <div class="trend-bar-bg">
-                                <div class="trend-bar-fill" style="width: {bar_pct}%; background: {color};"></div>
-                            </div>
-                            <span class="trend-badge" style="background: {badge_bg}; border: 1px solid {badge_border}; color: {color};">
-                                {badge_label} ({weight:+.3f})
-                            </span>
-                        </div>
-                        """,
-                        unsafe_allow_html=True,
+                    rows_html.append(
+                        f'<div class="trend-row">'
+                        f'<span class="trend-name">{feat}</span>'
+                        f'<div class="trend-bar-bg"><div class="trend-bar-fill" style="width: {bar_pct}%; background: {color};"></div></div>'
+                        f'<span class="trend-badge" style="background: {badge_bg}; border: 1px solid {badge_border}; color: {color};">'
+                        f'{badge_label} ({weight:+.3f})'
+                        f'</span>'
+                        f'</div>'
                     )
-                st.markdown("</div>", unsafe_allow_html=True)
+                trend_content = "".join(rows_html)
+                st.markdown(
+                    f'<div class="apple-card" style="padding: 1.6rem 1.8rem; margin-bottom: 1rem;">'
+                    f'<div class="apple-section-header" style="margin-bottom: 0.35rem;"><span>📈</span> PHYSIOLOGICAL RISK FACTOR CONTRIBUTIONS</div>'
+                    f'<p style="color:#8E8E93; font-size:0.85rem; margin-top:0; margin-bottom:1rem;">'
+                    f'Derived from the trained Logistic Regression model coefficients scaled by this patient\'s transformed biomarkers.'
+                    f'</p>'
+                    f'{trend_content}'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
 
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
@@ -1302,27 +1316,21 @@ with tab2:
     fi_img = Path("reports/feature_importance.png")
 
     with c1:
-        st.markdown('<div class="apple-card" style="padding: 1.2rem; margin-bottom: 0;">', unsafe_allow_html=True)
         if roc_img.exists():
             st.image(str(roc_img), caption="Multi-Model ROC Curves Overlay (Test Set)", width="stretch")
         else:
             st.warning("ROC curves plot not found.")
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with c2:
-        st.markdown('<div class="apple-card" style="padding: 1.2rem; margin-bottom: 0;">', unsafe_allow_html=True)
         if cm_img.exists():
             st.image(str(cm_img), caption="Normalized Confusion Matrix (Winning Pipeline)", width="stretch")
         else:
             st.warning("Confusion matrix plot not found.")
-        st.markdown('</div>', unsafe_allow_html=True)
 
     if fi_img.exists():
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown('<div class="apple-card" style="padding: 1.4rem;">', unsafe_allow_html=True)
-        st.markdown("##### 🌲 Feature Importance & Predictive Markers")
+        st.markdown('<div class="apple-section-header"><span>🌲</span> TOP CLINICAL PREDICTIVE MARKERS</div>', unsafe_allow_html=True)
         st.image(str(fi_img), caption="Top Clinical Predictive Markers in the Pipeline", width="stretch")
-        st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ╔══════════════════════════════════════════════════════════════════════════════╗
@@ -1335,70 +1343,64 @@ with tab3:
 
     with info_left:
         st.markdown(
-            """
-            <div class="apple-card">
-                <h4 style="margin-top:0; color:#FFFFFF;">🗂️ Dataset Architecture</h4>
-                <ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem;">
-                    <li><strong>Dataset Source:</strong> Kaggle Heart Failure Prediction Dataset by <em>fedesoriano</em></li>
-                    <li><strong>Total Cohort:</strong> 918 patients synthesized across 5 clinical registries (Cleveland, Hungarian, Switzerland, Long Beach VA, Statlog)</li>
-                    <li><strong>Features:</strong> 11 clinical indicators + 1 binary target (<code>HeartDisease</code>)</li>
-                    <li><strong>Class Distribution:</strong> 508 Positive (55.3%) vs. 410 Negative (44.7%) — balanced cohort</li>
-                </ul>
-
-                <h4 style="margin-top:1.4rem; color:#FFFFFF;">🛠️ Data Quality Remediation</h4>
-                <ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem;">
-                    <li><strong>Cholesterol Zeros (172 records):</strong> Biologically impossible serum values converted to <code>NaN</code>, imputed with training median inside the Pipeline, and flagged via <code>Cholesterol_missing</code>.</li>
-                    <li><strong>RestingBP Zero (1 record):</strong> Handled safely via training median imputation.</li>
-                    <li><strong>Leakage Prevention:</strong> Scalers and encoders fit exclusively on training folds via scikit-learn <code>ColumnTransformer</code>.</li>
-                </ul>
-            </div>
-            """,
+            '<div class="apple-card">'
+            '<h4 style="margin-top:0; color:#FFFFFF;">🗂️ Dataset Architecture</h4>'
+            '<ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem;">'
+            '<li><strong>Dataset Source:</strong> Kaggle Heart Failure Prediction Dataset by <em>fedesoriano</em></li>'
+            '<li><strong>Total Cohort:</strong> 918 patients synthesized across 5 clinical registries (Cleveland, Hungarian, Switzerland, Long Beach VA, Statlog)</li>'
+            '<li><strong>Features:</strong> 11 clinical indicators + 1 binary target (<code>HeartDisease</code>)</li>'
+            '<li><strong>Class Distribution:</strong> 508 Positive (55.3%) vs. 410 Negative (44.7%) — balanced cohort</li>'
+            '</ul>'
+            '<h4 style="margin-top:1.4rem; color:#FFFFFF;">🛠️ Data Quality Remediation</h4>'
+            '<ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem;">'
+            '<li><strong>Cholesterol Zeros (172 records):</strong> Biologically impossible serum values converted to <code>NaN</code>, imputed with training median inside the Pipeline, and flagged via <code>Cholesterol_missing</code>.</li>'
+            '<li><strong>RestingBP Zero (1 record):</strong> Handled safely via training median imputation.</li>'
+            '<li><strong>Leakage Prevention:</strong> Scalers and encoders fit exclusively on training folds via scikit-learn <code>ColumnTransformer</code>.</li>'
+            '</ul>'
+            '</div>',
             unsafe_allow_html=True,
         )
 
     with info_right:
         st.markdown(
-            """
-            <div class="apple-card">
-                <h4 style="margin-top:0; color:#FFFFFF;">👥 Project Team Members</h4>
-                <div class="apple-team-grid" style="margin-top: 1rem; margin-bottom: 1.4rem;">
-                    <div class="apple-team-member">
-                        <div class="apple-avatar">AJ</div>
-                        <div class="apple-team-info">
-                            <div class="name">Adhithyan JS</div>
-                            <div class="roll">Roll No. 7 · ML Tuning</div>
-                        </div>
-                    </div>
-                    <div class="apple-team-member">
-                        <div class="apple-avatar">EA</div>
-                        <div class="apple-team-info">
-                            <div class="name">Evin Saj Abraham</div>
-                            <div class="roll">Roll No. 29 · Architecture</div>
-                        </div>
-                    </div>
-                    <div class="apple-team-member">
-                        <div class="apple-avatar">FH</div>
-                        <div class="apple-team-info">
-                            <div class="name">Farhana H</div>
-                            <div class="roll">Roll No. 30 · EDA & Reporting</div>
-                        </div>
-                    </div>
-                    <div class="apple-team-member">
-                        <div class="apple-avatar">RK</div>
-                        <div class="apple-team-info">
-                            <div class="name">Ridhin Krishna M</div>
-                            <div class="roll">Roll No. 53 · UI/UX & API</div>
-                        </div>
-                    </div>
-                </div>
-
-                <h4 style="margin-top:0; color:#FFFFFF;">⚠️ Clinical Limitations</h4>
-                <ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem; margin-bottom:0;">
-                    <li><strong>Cohort Size:</strong> 918 observations is an academic exploratory sample.</li>
-                    <li><strong>Missing Modern Biomarkers:</strong> Lacks Body Mass Index (BMI), smoking pack-years, and hs-Troponin. <code>FastingBS</code> acts as a binary glucose surrogate.</li>
-                    <li><strong>Decision-Support Only:</strong> Designed strictly as an adjunctive triage aid.</li>
-                </ul>
-            </div>
-            """,
+            '<div class="apple-card">'
+            '<h4 style="margin-top:0; color:#FFFFFF;">👥 Project Team Members</h4>'
+            '<div class="apple-team-grid" style="margin-top: 1rem; margin-bottom: 1.4rem;">'
+            '<div class="apple-team-member">'
+            '<div class="apple-avatar">AJ</div>'
+            '<div class="apple-team-info">'
+            '<div class="name">Adhithyan JS</div>'
+            '<div class="roll">Roll No. 7 · ML Tuning</div>'
+            '</div>'
+            '</div>'
+            '<div class="apple-team-member">'
+            '<div class="apple-avatar">EA</div>'
+            '<div class="apple-team-info">'
+            '<div class="name">Evin Saj Abraham</div>'
+            '<div class="roll">Roll No. 29 · Architecture</div>'
+            '</div>'
+            '</div>'
+            '<div class="apple-team-member">'
+            '<div class="apple-avatar">FH</div>'
+            '<div class="apple-team-info">'
+            '<div class="name">Farhana H</div>'
+            '<div class="roll">Roll No. 30 · EDA & Reporting</div>'
+            '</div>'
+            '</div>'
+            '<div class="apple-team-member">'
+            '<div class="apple-avatar">RK</div>'
+            '<div class="apple-team-info">'
+            '<div class="name">Ridhin Krishna M</div>'
+            '<div class="roll">Roll No. 53 · UI/UX & API</div>'
+            '</div>'
+            '</div>'
+            '</div>'
+            '<h4 style="margin-top:0; color:#FFFFFF;">⚠️ Clinical Limitations</h4>'
+            '<ul style="color:#AEAEB2; line-height:1.7; font-size:0.92rem; padding-left:1.2rem; margin-bottom:0;">'
+            '<li><strong>Cohort Size:</strong> 918 observations is an academic exploratory sample.</li>'
+            '<li><strong>Missing Modern Biomarkers:</strong> Lacks Body Mass Index (BMI), smoking pack-years, and hs-Troponin. <code>FastingBS</code> acts as a binary glucose surrogate.</li>'
+            '<li><strong>Decision-Support Only:</strong> Designed strictly as an adjunctive triage aid.</li>'
+            '</ul>'
+            '</div>',
             unsafe_allow_html=True,
         )
