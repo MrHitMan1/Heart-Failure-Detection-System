@@ -7,7 +7,6 @@ Clinical decision-support machine learning interface for clinicians and college 
 from pathlib import Path
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
 
 # ── Page Configuration ──────────────────────────────────────────────────────────
 st.set_page_config(
@@ -755,7 +754,7 @@ st.markdown(
 )
 
 # ── Interactive Apple Ambient Glow Background (Safe WebGL/Canvas) ──────────────
-# Uses components.html() to isolate the script, resting in a fixed fullscreen plane
+# Uses st.iframe() to isolate the script, resting in a fixed fullscreen plane
 # behind all content. The mouse creates soft glowing attraction waves.
 _APPLE_FLUID_BG = """
 <style>
@@ -868,7 +867,7 @@ _APPLE_FLUID_BG = """
 })();
 </script>
 """
-components.html(_APPLE_FLUID_BG, height=0)
+st.iframe(_APPLE_FLUID_BG, height=0)
 
 # ── Model Predictor Singleton ──────────────────────────────────────────────────
 @st.cache_resource
