@@ -290,83 +290,106 @@ st.markdown(
         color: #F5F5F7 !important;
         font-weight: 600 !important;
         font-size: 0.88rem !important;
-        margin-bottom: 0.35rem !important;
+        margin-bottom: 0.4rem !important;
         letter-spacing: -0.01em !important;
     }
 
-    /* Distinct Input Containers (Select & Number Inputs) */
+    /* Distinct Input Boxes (Number Input Container & Selectbox) */
+    div[data-testid="stNumberInputContainer"],
+    div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
     div[data-baseweb="select"] > div,
-    div[data-baseweb="input"] > div {
-        background: rgba(255, 255, 255, 0.09) !important;
-        background-color: rgba(255, 255, 255, 0.09) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.20) !important;
+    div[data-testid="stTextInput"] [data-baseweb="input"] > div {
+        background-color: #22222a !important;
+        background: #22222a !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
         border-radius: 12px !important;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35),
-                    0 1px 0 rgba(255, 255, 255, 0.08) !important;
-        transition: all 0.2s ease !important;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        min-height: 44px !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
     }
 
     /* Hover State */
+    div[data-testid="stNumberInputContainer"]:hover,
+    div[data-testid="stSelectbox"] [data-baseweb="select"] > div:hover,
     div[data-baseweb="select"] > div:hover,
-    div[data-baseweb="input"] > div:hover {
-        background: rgba(255, 255, 255, 0.12) !important;
-        background-color: rgba(255, 255, 255, 0.12) !important;
-        border-color: rgba(255, 255, 255, 0.32) !important;
+    div[data-testid="stTextInput"] [data-baseweb="input"] > div:hover {
+        background-color: #282832 !important;
+        background: #282832 !important;
+        border-color: rgba(255, 255, 255, 0.45) !important;
     }
 
-    /* Focus State: Soft Apple Halo Glow (replacing harsh thin red line) */
-    div[data-baseweb="input"]:focus-within > div,
-    div[data-baseweb="input"] > div:focus-within,
-    div[data-baseweb="select"]:focus-within > div {
-        background: rgba(255, 255, 255, 0.13) !important;
-        background-color: rgba(255, 255, 255, 0.13) !important;
-        border-color: rgba(255, 45, 85, 0.85) !important;
-        box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.28),
-                    inset 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    /* Focus State: Apple Halo Glow */
+    div[data-testid="stNumberInputContainer"]:focus-within,
+    div[data-testid="stSelectbox"] [data-baseweb="select"]:focus-within > div,
+    div[data-baseweb="select"]:focus-within > div,
+    div[data-testid="stTextInput"] [data-baseweb="input"]:focus-within > div {
+        background-color: #262630 !important;
+        background: #262630 !important;
+        border: 1.5px solid #FF2D55 !important;
+        box-shadow: 0 0 0 3px rgba(255, 45, 85, 0.28), inset 0 2px 4px rgba(0, 0, 0, 0.35) !important;
     }
 
-    /* Input text color & weight */
+    /* Inner input elements transparency inside the container */
+    div[data-testid="stNumberInputContainer"] div[data-baseweb="input"],
+    div[data-testid="stNumberInputContainer"] div[data-baseweb="base-input"] {
+        background-color: transparent !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Input text formatting */
+    div[data-testid="stNumberInputContainer"] input,
     div[data-baseweb="input"] input {
         color: #FFFFFF !important;
-        font-size: 0.96rem !important;
-        font-weight: 500 !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        padding-left: 12px !important;
     }
 
-    /* Tactile Stepper Buttons (+ and -) */
+    /* Stepper Buttons (+ and -) inside Number Input */
     button[data-testid="stNumberInputStepDown"],
     button[data-testid="stNumberInputStepUp"] {
         background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
         border-radius: 8px !important;
-        margin: 2px !important;
-        color: #C7C7CC !important;
+        margin: 4px 3px !important;
+        height: 32px !important;
+        width: 32px !important;
+        color: #E5E5EA !important;
         transition: all 0.15s ease !important;
     }
     button[data-testid="stNumberInputStepDown"]:hover,
     button[data-testid="stNumberInputStepUp"]:hover {
-        background: rgba(255, 255, 255, 0.18) !important;
+        background: rgba(255, 255, 255, 0.20) !important;
         color: #FFFFFF !important;
     }
 
-    /* Make 'Press Enter to submit form' discreet and less obvious */
+    /* Selectbox text and dropdown icon */
+    div[data-baseweb="select"] span,
+    div[data-baseweb="select"] div {
+        color: #FFFFFF !important;
+        font-weight: 500 !important;
+    }
+    div[data-baseweb="select"] svg {
+        fill: #AEAEB2 !important;
+        color: #AEAEB2 !important;
+    }
+
+    /* Completely hide 'Press Enter to submit form' helper prompt */
     div[data-testid="InputInstructions"],
     [data-testid="InputInstructions"],
-    [data-testid="stInputInstructions"] {
-        opacity: 0.22 !important;
-        font-size: 0.65rem !important;
-        color: #8E8E93 !important;
-        font-style: italic !important;
-        letter-spacing: -0.01em !important;
-        transition: opacity 0.2s ease !important;
-    }
-    div[data-testid="InputInstructions"] * {
-        color: #8E8E93 !important;
-        font-size: 0.65rem !important;
-    }
-    div[data-baseweb="input"]:focus-within [data-testid="InputInstructions"],
-    div[data-baseweb="input"]:hover [data-testid="InputInstructions"] {
-        opacity: 0.40 !important;
+    [data-testid="stInputInstructions"],
+    small[data-testid="InputInstructions"] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     /* Slider Container Distinction */
