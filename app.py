@@ -867,7 +867,7 @@ _APPLE_FLUID_BG = """
 })();
 </script>
 """
-st.iframe(_APPLE_FLUID_BG, height=0)
+st.iframe(_APPLE_FLUID_BG, height=1)
 
 # ── Model Predictor Singleton ──────────────────────────────────────────────────
 @st.cache_resource
